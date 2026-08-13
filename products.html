@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제품/서비스 | 다온상사</title>
+<meta name="description" content="다온상사 - 전국 익일배송, 실시간 재고관리를 갖춘 유통·도소매 전문기업">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="util-bar">
+  <div class="wrap util-row">
+    <span class="mono">TEL 02-1234-5678</span>
+    <span class="mono">EMAIL order@daonsangsa.co.kr</span>
+    <span class="mono">평일 09:00 - 18:00</span>
+  </div>
+</div>
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">DO</div>
+      <div class="logo-text">다온상사</div>
+    </a>
+    <div class="nav-right">
+      <nav>
+        <ul>
+          <li><a href="about.html">회사소개</a></li>
+          <li><a href="products.html" class="nav-active">제품/서비스</a></li>
+          <li><a href="features.html">왜 다온인가</a></li>
+          <li><a href="contact.html">문의하기</a></li>
+        </ul>
+      </nav>
+      <a href="contact.html" class="nav-cta">거래 문의하기</a>
+    </div>
+  </div>
+</header>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="section-num">02 · 제품 / 서비스</div>
+    <h1 class="display">카테고리별 취급 품목</h1>
+  </div>
+</section>
+<section class="products">
+  <div class="wrap">
+    <p class="page-lead">필요한 품목이 목록에 없어도 괜찮습니다. <a href="contact.html">문의 양식</a>으로 소싱 요청을 남겨주세요.</p>
+    <div class="product-layout">
+      <aside class="product-sidebar">
+        <span class="sidebar-label">SEARCH</span>
+        <input type="text" id="product-search" placeholder="제품명으로 검색 (예: 생수, 장갑)" class="search-input">
+        <span class="sidebar-label">CATEGORY</span>
+        <ul id="category-filters" class="category-list"></ul>
+      </aside>
+      <div class="product-main">
+        <div id="product-grid" class="product-grid"></div>
+        <p id="product-empty" class="product-empty" style="display:none;">검색 조건에 맞는 제품이 없습니다. 다른 검색어나 카테고리를 선택해 보세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap footer-row">
+    <div class="display">다온상사</div>
+    <div>사업자등록번호 000-00-00000 · 대표 홍길동 · © 2026 Daon Sangsa. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>

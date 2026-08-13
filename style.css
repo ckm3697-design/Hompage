@@ -52,9 +52,11 @@ header{
   color:var(--safety); font-family:'IBM Plex Mono'; font-weight:600; font-size:14px;
 }
 .logo-text{font-family:'Black Han Sans'; font-size:24px; letter-spacing:0.02em;}
-nav ul{list-style:none; display:flex; gap:44px;}
-nav a{font-size:14.5px; font-weight:500; color:var(--ink-soft); transition:color .15s;}
+nav ul{list-style:none; display:flex; gap:44px; height:100%; align-items:center;}
+nav li{height:100%; display:flex; align-items:center;}
+nav a{font-size:14.5px; font-weight:500; color:var(--ink-soft); transition:color .15s; height:100%; display:flex; align-items:center; border-bottom:2px solid transparent;}
 nav a:hover{color:var(--safety-dark);}
+nav a.nav-active{color:var(--ink); font-weight:700; border-bottom-color:var(--safety-dark);}
 .nav-cta{border:1.5px solid var(--ink); padding:10px 20px; font-size:13.5px; font-weight:700;}
 .nav-cta:hover{background:var(--ink); color:var(--paper);}
 .nav-right{display:flex; align-items:center; gap:36px;}
@@ -108,6 +110,26 @@ nav a:hover{color:var(--safety-dark);}
   font-family:'Black Han Sans'; font-size:14px; line-height:1.3; transform:rotate(14deg);
   background:rgba(255,255,255,0.85);
 }
+
+/* ===== 서브 페이지 상단 타이틀 바 ===== */
+.page-hero{background:var(--white); border-bottom:1px solid var(--line); padding:52px 0;}
+.page-hero .section-num{font-family:'IBM Plex Mono'; font-size:13px; color:var(--safety-dark); margin-bottom:10px;}
+.page-hero h1{font-size:38px;}
+.page-lead{color:var(--ink-soft); font-size:15.5px; margin-bottom:44px; max-width:680px;}
+.page-lead a{color:var(--safety-dark); font-weight:700; border-bottom:1px solid var(--safety-dark);}
+
+/* ===== 홈 페이지: 바로가기 카드 ===== */
+.quick-links{background:var(--white); border-top:1px solid var(--line);}
+.quick-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+.quick-card{background:var(--white); padding:32px 26px; display:flex; flex-direction:column; gap:10px; transition:background .15s;}
+.quick-card:hover{background:var(--navy-deep); color:var(--white);}
+.quick-card:hover .q-num{color:var(--safety);}
+.quick-card:hover p{color:#B9C3CE;}
+.quick-card:hover .q-arrow{color:var(--safety);}
+.quick-card .q-num{font-family:'IBM Plex Mono'; font-size:13px; color:var(--ink-soft); transition:color .15s;}
+.quick-card h3{font-size:19px;}
+.quick-card p{font-size:13.5px; color:var(--ink-soft); flex:1; transition:color .15s;}
+.quick-card .q-arrow{font-family:'IBM Plex Mono'; font-size:12px; color:var(--safety-dark); transition:color .15s;}
 
 /* ===== Section shared ===== */
 section{padding:120px 0;}

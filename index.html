@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- PC 사이트 상단 유틸리티 바 -->
 <div class="util-bar">
   <div class="wrap util-row">
     <span class="mono">TEL 02-1234-5678</span>
@@ -20,28 +18,25 @@
     <span class="mono">평일 09:00 - 18:00</span>
   </div>
 </div>
-
 <header>
   <div class="wrap nav-row">
-    <div class="logo">
+    <a href="index.html" class="logo">
       <div class="logo-mark">DO</div>
       <div class="logo-text">다온상사</div>
-    </div>
+    </a>
     <div class="nav-right">
       <nav>
         <ul>
-          <li><a href="#about">회사소개</a></li>
-          <li><a href="#products">제품/서비스</a></li>
-          <li><a href="#features">왜 다온인가</a></li>
-          <li><a href="#contact">문의하기</a></li>
+          <li><a href="about.html">회사소개</a></li>
+          <li><a href="products.html">제품/서비스</a></li>
+          <li><a href="features.html">왜 다온인가</a></li>
+          <li><a href="contact.html">문의하기</a></li>
         </ul>
       </nav>
-      <a href="#contact" class="nav-cta">거래 문의하기</a>
+      <a href="contact.html" class="nav-cta">거래 문의하기</a>
     </div>
   </div>
 </header>
-
-<!-- ============ HERO (회사 캐치프레이즈 - 여기 텍스트만 바꾸면 됩니다) ============ -->
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -49,8 +44,8 @@
       <h1 class="display">전국 어디든,<br>내일이면 <span class="accent">도착하는</span><br>유통망</h1>
       <p class="lead">다온상사는 생활용품부터 산업용 자재까지, 소량 발주부터 대량 납품까지 대응하는 도소매 유통 전문기업입니다.</p>
       <div class="btn-row">
-        <a href="#products" class="btn btn-primary">제품 카탈로그 보기</a>
-        <a href="#contact" class="btn btn-ghost">거래 문의하기</a>
+        <a href="products.html" class="btn btn-primary">제품 카탈로그 보기</a>
+        <a href="contact.html" class="btn btn-ghost">거래 문의하기</a>
       </div>
     </div>
     <div>
@@ -72,146 +67,45 @@
   </div>
 </section>
 
-<!-- ============ 회사소개 (문단 텍스트만 바꾸면 됩니다) ============ -->
-<section class="about" id="about">
+<section class="quick-links">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-num">01 · 회사소개</div>
-      <h2 class="display">신뢰로 이어온 유통, 다온상사</h2>
+      <div class="section-num">00 · 바로가기</div>
+      <h2 class="display">필요한 정보로 바로 이동하세요</h2>
     </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>다온상사는 제조사와 소매점, 그리고 최종 고객을 잇는 유통 파트너입니다. 복잡한 발주 과정을 단순화하고, 안정적인 재고 확보와 빠른 배송으로 거래처의 매출 흐름이 끊기지 않도록 돕습니다.</p>
-        <p>생활용품, 식품·음료, 잡화, 산업용 소모품 등 다양한 카테고리의 상품을 직접 소싱하고 자체 물류센터에서 관리하여, 소량 주문 고객에게도 대량 거래처와 동일한 품질과 속도를 제공합니다.</p>
-        <p>오랜 거래처와의 신뢰를 바탕으로 매입 단가를 안정적으로 유지하며, 이를 합리적인 공급가로 연결하는 것이 다온상사의 원칙입니다.</p>
-      </div>
-      <div class="stat-list">
-        <div class="stat-item"><span class="stat-label">거래 유통업체 수</span><span class="stat-num mono">1,200+</span></div>
-        <div class="stat-item"><span class="stat-label">취급 품목 수</span><span class="stat-num mono">3,400+</span></div>
-        <div class="stat-item"><span class="stat-label">평균 배송 소요</span><span class="stat-num mono">D+1</span></div>
-        <div class="stat-item"><span class="stat-label">누적 거래 연차</span><span class="stat-num mono">18년</span></div>
-      </div>
-    </div>
-
-    <div class="flow">
-      <div class="flow-node"><span class="n">STEP 01</span><span class="t">제조사 소싱</span></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node"><span class="n">STEP 02</span><span class="t">물류센터 입고</span></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node"><span class="n">STEP 03</span><span class="t">재고 실시간 관리</span></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node"><span class="n">STEP 04</span><span class="t">전국 배송</span></div>
+    <div class="quick-grid">
+      <a href="about.html" class="quick-card">
+        <span class="q-num mono">01</span>
+        <h3>회사소개</h3>
+        <p>다온상사가 걸어온 유통망과 원칙을 소개합니다</p>
+        <span class="q-arrow">자세히 보기 →</span>
+      </a>
+      <a href="products.html" class="quick-card">
+        <span class="q-num mono">02</span>
+        <h3>제품 / 서비스</h3>
+        <p>카테고리별 취급 품목을 검색하고 필터링해보세요</p>
+        <span class="q-arrow">카탈로그 보기 →</span>
+      </a>
+      <a href="features.html" class="quick-card">
+        <span class="q-num mono">03</span>
+        <h3>왜 다온인가</h3>
+        <p>거래처가 다온상사를 선택하는 세 가지 이유</p>
+        <span class="q-arrow">차별점 보기 →</span>
+      </a>
+      <a href="contact.html" class="quick-card">
+        <span class="q-num mono">04</span>
+        <h3>문의하기</h3>
+        <p>연락처, 오시는 길, 문의 양식을 확인하세요</p>
+        <span class="q-arrow">문의하기 →</span>
+      </a>
     </div>
   </div>
 </section>
-
-<!-- ============ 제품/서비스: products.json 에서 자동으로 목록을 불러옵니다 ============ -->
-<section class="products" id="products">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-num">02 · 제품 / 서비스</div>
-      <h2 class="display">카테고리별 취급 품목</h2>
-      <p>필요한 품목이 목록에 없어도 괜찮습니다. 아래 문의 양식으로 소싱 요청을 남겨주세요.</p>
-    </div>
-
-    <div class="product-layout">
-      <aside class="product-sidebar">
-        <span class="sidebar-label">SEARCH</span>
-        <input type="text" id="product-search" placeholder="제품명으로 검색 (예: 생수, 장갑)" class="search-input">
-        <span class="sidebar-label">CATEGORY</span>
-        <ul id="category-filters" class="category-list"></ul>
-      </aside>
-      <div class="product-main">
-        <div id="product-grid" class="product-grid"></div>
-        <p id="product-empty" class="product-empty" style="display:none;">검색 조건에 맞는 제품이 없습니다. 다른 검색어나 카테고리를 선택해 보세요.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 차별점 ============ -->
-<section class="features" id="features">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-num">03 · 왜 다온인가</div>
-      <h2 class="display">거래처가 다온을 선택하는 이유</h2>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <span class="f-num mono">01</span>
-        <h3>전국 익일 배송</h3>
-        <p>자체 물류망과 협력 배송사를 통해 대부분 지역에 익일 도착을 지원합니다.</p>
-      </div>
-      <div class="feature-card">
-        <span class="f-num mono">02</span>
-        <h3>실시간 재고 연동</h3>
-        <p>재고 시스템을 실시간으로 공유해 품절·지연 없이 발주 계획을 세울 수 있습니다.</p>
-      </div>
-      <div class="feature-card">
-        <span class="f-num mono">03</span>
-        <h3>소량·대량 모두 대응</h3>
-        <p>최소 주문 수량 제한 없이 소매점부터 대형 거래처까지 동일한 조건으로 지원합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 문의하기: 연락처 / 지도 / 문의폼 ============ -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-num">04 · 문의하기</div>
-      <h2 class="display">거래를 시작해보세요</h2>
-      <p>아래 정보로 직접 연락하시거나, 문의 양식을 남겨주시면 담당자 이메일로 바로 접수됩니다.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="info-card">
-        <div class="info-row"><span class="k mono">TEL</span><span class="v">02-1234-5678<span>평일 09:00 - 18:00</span></span></div>
-        <div class="info-row"><span class="k mono">EMAIL</span><span class="v">order@daonsangsa.co.kr<span>거래·견적 문의</span></span></div>
-        <div class="info-row"><span class="k mono">ADDR</span><span class="v">서울특별시 중구 을지로 00길 00, 3층<span>다온상사 물류사업부</span></span></div>
-        <div class="info-row"><span class="k mono">HOURS</span><span class="v">평일 09:00 - 18:00<span>주말 및 공휴일 휴무</span></span></div>
-      </div>
-
-      <!-- 지도: 아래 iframe의 src를 우리 회사 주소의 구글맵 '지도 퍼가기' 코드로 교체하세요 -->
-      <div class="map-frame">
-        <iframe
-          src="https://www.google.com/maps?q=서울특별시%20중구%20을지로&output=embed"
-          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-
-      <!-- 문의폼: action 주소를 Formspree에서 발급받은 본인 주소로 교체하세요 (README 참고) -->
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="field">
-          <label for="name">담당자명 / 업체명</label>
-          <input id="name" name="name" type="text" placeholder="예: 홍길동 / OO마트" required>
-        </div>
-        <div class="field">
-          <label for="phone">연락처</label>
-          <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" required>
-        </div>
-        <div class="field">
-          <label for="email">이메일 (회신용)</label>
-          <input id="email" name="_replyto" type="email" placeholder="reply@example.com">
-        </div>
-        <div class="field">
-          <label for="msg">문의 내용</label>
-          <textarea id="msg" name="message" placeholder="필요한 품목, 예상 물량 등을 남겨주세요" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">문의 보내기</button>
-      </form>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap footer-row">
     <div class="display">다온상사</div>
     <div>사업자등록번호 000-00-00000 · 대표 홍길동 · © 2026 Daon Sangsa. All rights reserved.</div>
   </div>
 </footer>
-
-<script src="app.js"></script>
 </body>
 </html>

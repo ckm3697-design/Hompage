@@ -1,4 +1,4 @@
-# 다온상사 홈페이지 관리 가이드
+# 다온파이프 홈페이지 관리 가이드
 
 > 이 사이트는 **PC(데스크톱) 화면을 기준**으로 설계되었습니다. 모바일 반응형이 아니라
 > 최소 가로폭 1024px 이상에서 보는 것을 기준으로 사이드바형 제품 카탈로그, 3단 문의 영역 등을
@@ -15,11 +15,7 @@
 | 파일 | 설명 | 평소에 수정할 일 |
 |---|---|---|
 | `index.html` | 홈 (히어로 + 바로가기 카드) | 가끔 |
-| `about.html` | 회사소개 &gt; 개요 (좌측 서브메뉴 포함) | 가끔 |
-| `about-greeting.html` | 회사소개 &gt; 인사말 | 가끔 |
-| `about-history.html` | 회사소개 &gt; 회사 연혁 | **자주** (연혁 추가할 때) |
-| `about-org.html` | 회사소개 &gt; 조직도 | 가끔 |
-| `about-location.html` | 회사소개 &gt; 오시는 길 | 가끔 |
+| `about.html` | 회사소개 페이지 | 가끔 |
 | `products.html` | 제품/서비스 페이지 (검색·필터) | - |
 | `features.html` | 왜 다온인가 페이지 | 가끔 |
 | `contact.html` | 문의하기 페이지 (연락처·지도·폼) | 가끔 |
@@ -30,14 +26,9 @@
 **제품을 추가/수정/삭제하는 건 `products.json` 파일 하나만 건드리면 됩니다.**
 디자인이 깨질 걱정 없이 안전하게 관리할 수 있도록 데이터와 디자인을 분리해뒀습니다.
 
-`about.html`을 열면 왼쪽에 개요 · 인사말 · 회사 연혁 · 조직도 · 오시는 길 서브메뉴가 있고,
-클릭하면 각각 `about-greeting.html`, `about-history.html`, `about-org.html`, `about-location.html`로
-이동합니다. 서브메뉴 항목을 더 추가하고 싶다면 새 HTML 파일을 만든 뒤, **5개 about-\*.html
-파일 전부**에서 `<aside class="sub-nav">` 안의 목록에 링크를 추가해야 합니다 (정적 사이트라
-자동으로 동기화되지 않습니다).
-
 각 페이지는 같은 헤더(상단 메뉴)와 푸터를 공유합니다. 메뉴 문구나 링크를 바꾸고 싶다면
-9개 HTML 파일 모두에서 `<nav>` 부분을 동일하게 수정해야 합니다.
+5개 HTML 파일 모두에서 `<nav>` 부분을 동일하게 수정해야 합니다 (정적 사이트라 자동으로
+공유되지 않습니다).
 
 ---
 
@@ -51,7 +42,7 @@
 ## 2단계. 파일 업로드
 
 1. 방금 만든 저장소 페이지에서 `Add file` → `Upload files` 클릭
-2. 이 폴더의 파일 13개(`index.html`, `about.html`, `about-greeting.html`, `about-history.html`, `about-org.html`, `about-location.html`, `products.html`, `features.html`, `contact.html`, `style.css`, `app.js`, `products.json`, `README.md`)를 전부 끌어다 놓기
+2. 이 폴더의 파일 8개(`index.html`, `about.html`, `products.html`, `features.html`, `contact.html`, `style.css`, `app.js`, `products.json`)를 전부 끌어다 놓기
 3. 아래 `Commit changes` 클릭
 
 ## 3단계. GitHub Pages 켜기
@@ -73,7 +64,7 @@
 {
   "code": "CAT01-04",
   "category": "생활용품",
-  "name": "제품 이름",
+  "name": "규격 이름",
   "desc": "제품 한 줄 설명"
 }
 ```
@@ -90,7 +81,7 @@
 1. `index.html` 파일을 열고 연필 아이콘(Edit) 클릭
 2. 다음 텍스트를 찾아 원하는 내용으로 바꾸기:
    - 전화번호: `02-1234-5678`
-   - 이메일: `order@daonsangsa.co.kr`
+   - 이메일: `sales@daonpipe.co.kr`
    - 주소: `서울특별시 중구 을지로 00길 00, 3층`
    - 회사소개 문단, 통계 숫자(거래처 수, 취급 품목 수 등)
 3. 저장(`Commit changes`)
@@ -132,5 +123,5 @@ GitHub Pages는 서버가 없는 정적 사이트라, 문의 폼이 실제로 �
   불러오는 기능은 GitHub Pages처럼 실제 웹 주소로 열었을 때만 동작합니다.
 - **수정한 내용이 사이트에 안 보여요** → 저장(Commit) 후 1~2분 기다렸다가 새로고침
   (강력 새로고침: Ctrl+Shift+R / Cmd+Shift+R) 해보세요.
-- **도메인(예: daonsangsa.com)을 연결하고 싶어요** → Settings → Pages 화면에서
+- **도메인(예: daonpipe.com)을 연결하고 싶어요** → Settings → Pages 화면에서
   `Custom domain`란에 보유한 도메인을 입력하면 됩니다. 단, 도메인 자체는 별도 구매(유료)가 필요합니다.

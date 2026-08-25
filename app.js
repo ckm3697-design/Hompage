@@ -4,6 +4,10 @@
    검색어 / 카테고리 버튼으로 필터링합니다.
    ※ 이 파일은 로직 담당입니다. 제품을 추가/수정하려면
      이 파일이 아니라 products.json 을 편집하세요.
+
+   사진을 넣고 싶다면 products.json의 각 항목에 "image" 값으로
+   이미지 경로(예: "images/pvc-101.jpg")를 추가하면 자동으로 그 사진이 쓰이고,
+   없으면 카테고리별 기본 아이콘이 대신 표시됩니다.
    ========================================================= */
 
 let ALL_PRODUCTS = [];
@@ -14,6 +18,35 @@ const grid = document.getElementById("product-grid");
 const searchInput = document.getElementById("product-search");
 const filterBar = document.getElementById("category-filters");
 const emptyState = document.getElementById("product-empty");
+
+/* 카테고리별 기본 아이콘 (사진이 없을 때 대신 보여줌) */
+const CATEGORY_ICONS = {
+  "난연 PVC 파이프": `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="24" cy="24" r="8.5" stroke="currentColor" stroke-width="2.2"/>
+    <line x1="24" y1="9" x2="24" y2="15.5" stroke="currentColor" stroke-width="2.2"/>
+    <line x1="24" y1="32.5" x2="24" y2="39" stroke="currentColor" stroke-width="2.2"/>
+  </svg>`,
+  "소방 배관자재": `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 8c5 6 8 11 8 15.5C32 29 28.4 33 24 33s-8-4-8-9.5C16 19 19 14 24 8Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M14 40h20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M24 33v7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>`,
+  "이음관·부속자재": `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 14v8a10 10 0 0 0 10 10h8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    <rect x="4" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2.2"/>
+    <rect x="26" y="26" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2.2"/>
+  </svg>`,
+  "보온·단열자재": `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 16c8-6 24-6 32 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M8 24c8-6 24-6 32 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M8 32c8-6 24-6 32 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>`,
+};
+const DEFAULT_ICON = `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="9" y="9" width="30" height="30" rx="3" stroke="currentColor" stroke-width="2.2"/>
+  <path d="M9 19h30M19 9v30" stroke="currentColor" stroke-width="2.2"/>
+</svg>`;
 
 function renderCategoryButtons(categories) {
   const cats = ["전체", ...categories];
@@ -52,15 +85,21 @@ function renderProducts() {
   emptyState.style.display = "none";
 
   grid.innerHTML = filtered
-    .map(
-      (p) => `
+    .map((p) => {
+      const thumb = p.image
+        ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+        : CATEGORY_ICONS[p.category] || DEFAULT_ICON;
+      return `
       <div class="product-card">
-        <span class="p-code mono">${p.code}</span>
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        <span class="p-cat">${p.category}</span>
-      </div>`
-    )
+        <div class="product-thumb${p.image ? " has-photo" : ""}">${thumb}</div>
+        <div class="product-body">
+          <span class="p-code mono">${p.code}</span>
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <span class="p-cat-tag">${p.category}</span>
+        </div>
+      </div>`;
+    })
     .join("");
 }
 

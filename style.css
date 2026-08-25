@@ -267,20 +267,36 @@ section{padding:120px 0;}
 .cat-btn.active{color:var(--safety-dark); font-weight:700;}
 
 .product-main{min-width:0;}
-.product-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); min-height:80px;}
+.product-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; min-height:80px;}
 .product-card{
-  background:var(--glass-bg-strong); backdrop-filter:blur(var(--glass-blur)); padding:32px 26px; min-height:200px;
-  display:flex; flex-direction:column; justify-content:space-between; gap:8px;
-  transition:background .15s;
+  background:var(--glass-bg-strong); backdrop-filter:blur(var(--glass-blur));
+  border:1px solid var(--glass-border); border-radius:14px; overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow:0 16px 40px -24px rgba(14,42,77,0.35);
+  transition:transform .18s, box-shadow .18s, background .18s;
 }
-.product-card:hover{background:var(--navy-deep); color:var(--white);}
-.product-card:hover .p-code{color:var(--safety);}
-.product-card:hover .p-cat{color:#B9C3CE;}
-.product-card .p-code{font-family:'IBM Plex Mono'; font-size:12px; color:var(--ink-soft); transition:color .15s;}
-.product-card h3{font-size:18.5px;}
-.product-card p{font-size:14px; color:var(--ink-soft);}
-.product-card:hover p{color:#B9C3CE;}
-.product-card .p-cat{font-family:'IBM Plex Mono'; font-size:11px; color:var(--safety-dark); margin-top:10px;}
+.product-card:hover{transform:translateY(-4px); box-shadow:0 24px 50px -20px rgba(14,42,77,0.4);}
+
+.product-thumb{
+  aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(47,111,237,0.22), transparent 55%),
+    linear-gradient(135deg, rgba(203,220,242,0.55), rgba(238,244,252,0.5));
+  color:var(--safety-dark); padding:26px;
+}
+.product-thumb svg{width:64px; height:64px; opacity:0.85;}
+.product-thumb.has-photo{padding:0; background:var(--paper-2);}
+.product-thumb.has-photo img{width:100%; height:100%; object-fit:cover;}
+
+.product-body{padding:22px 22px 24px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.product-card .p-code{font-family:'IBM Plex Mono'; font-size:12px; color:var(--ink-soft);}
+.product-card h3{font-size:17.5px; font-weight:700;}
+.product-card p{font-size:13.5px; color:var(--ink-soft); flex:1;}
+.p-cat-tag{
+  align-self:flex-start; font-family:'IBM Plex Mono'; font-size:11px; color:var(--safety-dark);
+  background:rgba(47,111,237,0.1); border:1px solid rgba(47,111,237,0.25);
+  padding:4px 10px; border-radius:999px; margin-top:6px;
+}
 .product-empty{padding:40px 4px; color:var(--ink-soft); font-size:14.5px;}
 
 /* ===== 차별점 ===== */

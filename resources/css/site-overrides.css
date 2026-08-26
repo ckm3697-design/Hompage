@@ -1,0 +1,61 @@
+/* =========================================================
+   site-overrides.css
+   템플릿 원본 파일(style.css, templatehouse.css)은 건드리지 않고,
+   색상·이미지만 삼원 브랜드에 맞게 여기서 덮어씁니다.
+   ========================================================= */
+
+:root {
+  /* 삼원 브랜드 컬러 (블루 계열) */
+  --primary: #1B54D6;
+  --primary-rgb: 27, 84, 214;
+  --secondary: #0E2A4D;
+  --secondary-rgb: 14, 42, 77;
+}
+
+/* ===== 실제 사진이 준비되기 전까지 쓰는 배경 플레이스홀더 =====
+   실제 사진이 생기면 아래 background 속성을 
+   url(../images/파일명.jpg) no-repeat center/cover 로 바꿔주세요. */
+
+.properties-N4 {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(47, 111, 237, 0.55), transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(14, 42, 77, 0.65), transparent 55%),
+    linear-gradient(135deg, #0E2A4D 0%, #123B6B 55%, #1B54D6 130%) !important;
+}
+
+@media (max-width: 992px) {
+  .properties-N4 {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(47, 111, 237, 0.55), transparent 55%),
+      linear-gradient(135deg, #0E2A4D 0%, #123B6B 55%, #1B54D6 130%) !important;
+  }
+}
+
+.properties-N7 .col-right .item {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(47, 111, 237, 0.18), transparent 55%),
+    linear-gradient(135deg, #EEF4FC, #E2ECFA) !important;
+}
+
+.properties-N10 {
+  background: linear-gradient(135deg, #0E2A4D 0%, #123B6B 55%, #1B54D6 130%) !important;
+}
+
+@media (max-width: 992px) {
+  .properties-N10 {
+    background: linear-gradient(135deg, #0E2A4D 0%, #123B6B 55%, #1B54D6 130%) !important;
+  }
+}
+
+/* 히어로 슬라이드/제품 규격 썸네일 이미지가 없을 때도
+   레이아웃이 깨지지 않도록 배경색을 지정 */
+.properties-N4 .swiper-slide img,
+.properties-N7 .thumb img {
+  background-color: #EEF4FC;
+}
+
+/* 체크포인트 아이콘: 커스텀 아이콘 색상이 브랜드 블루와 일치하도록 */
+.properties-N6 .thumb img {
+  width: 6rem;
+  height: 6rem;
+}

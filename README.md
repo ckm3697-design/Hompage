@@ -1,112 +1,120 @@
-# 다온파이프 홈페이지 관리 가이드
+# 삼원 홈페이지 (템플릿 기반) 관리 가이드
 
-> 이 사이트는 **PC(데스크톱) 화면을 기준**으로 설계되었습니다. 모바일 반응형이 아니라
-> 최소 가로폭 1024px 이상에서 보는 것을 기준으로 사이드바형 제품 카탈로그, 3단 문의 영역 등을
-> 구성했습니다. 모바일에서 열면 확대/축소 없이 데스크톱 레이아웃이 그대로(가로 스크롤 가능하게) 보입니다.
->
-> 또한 **한 페이지를 쭉 스크롤하는 방식이 아니라, 상단 메뉴를 누르면 각각 별도의 페이지로
-> 이동하는 다중 페이지 구조**입니다 (index.html / about.html / products.html / features.html / contact.html).
+업로드해주신 템플릿을 기반으로 만든 **한 페이지짜리(원페이지) 홈페이지**입니다.
+상단 메뉴를 누르면 같은 페이지 안의 해당 섹션으로 스크롤 이동합니다 (분리된 여러
+HTML 파일이 아니라 `index.html` 하나에 모든 섹션이 들어있는 구조예요).
 
-이 폴더 안의 파일들을 GitHub에 올리면 무료로 회사 홈페이지를 운영할 수 있습니다.
-코딩을 몰라도 아래 순서만 따라 하면 됩니다.
+jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있어서
+별도 설치 없이 GitHub Pages에 그대로 올리면 동작합니다.
 
 ## 파일 구성
 
-| 파일 | 설명 | 평소에 수정할 일 |
-|---|---|---|
-| `index.html` | 홈 (히어로 + 바로가기 카드) | 가끔 |
-| `about.html` | 회사소개 페이지 | 가끔 |
-| `products.html` | 제품/서비스 페이지 (검색·필터) | - |
-| `features.html` | 왜 다온인가 페이지 | 가끔 |
-| `contact.html` | 문의하기 페이지 (연락처·지도·폼) | 가끔 |
-| `products.json` | 제품 목록 데이터 | **자주** (제품 추가/삭제할 때) |
-| `style.css` | 모든 페이지가 공유하는 디자인 | 거의 없음 |
-| `app.js` | 제품 검색·필터 로직 (products.html에서만 사용) | 거의 없음 |
-
-**제품을 추가/수정/삭제하는 건 `products.json` 파일 하나만 건드리면 됩니다.**
-디자인이 깨질 걱정 없이 안전하게 관리할 수 있도록 데이터와 디자인을 분리해뒀습니다.
-
-각 페이지는 같은 헤더(상단 메뉴)와 푸터를 공유합니다. 메뉴 문구나 링크를 바꾸고 싶다면
-5개 HTML 파일 모두에서 `<nav>` 부분을 동일하게 수정해야 합니다 (정적 사이트라 자동으로
-공유되지 않습니다).
-
----
-
-## 1단계. GitHub에 저장소 만들기
-
-1. [github.com](https://github.com) 가입 후 로그인
-2. 오른쪽 위 `+` → `New repository` 클릭
-3. Repository name에 원하는 이름 입력 (예: `daon-homepage`)
-4. `Public` 선택 → `Create repository` 클릭
-
-## 2단계. 파일 업로드
-
-1. 방금 만든 저장소 페이지에서 `Add file` → `Upload files` 클릭
-2. 이 폴더의 파일 8개(`index.html`, `about.html`, `products.html`, `features.html`, `contact.html`, `style.css`, `app.js`, `products.json`)를 전부 끌어다 놓기
-3. 아래 `Commit changes` 클릭
-
-## 3단계. GitHub Pages 켜기
-
-1. 저장소 상단 메뉴 `Settings` 클릭
-2. 왼쪽 메뉴 `Pages` 클릭
-3. `Branch`를 `main` / `/(root)`로 선택 후 `Save`
-4. 1~2분 기다리면 `https://내아이디.github.io/저장소이름/` 주소로 사이트가 열립니다
-
----
-
-## 제품 추가하는 방법 (자주 하게 될 작업)
-
-1. 저장소에서 `products.json` 파일 클릭
-2. 오른쪽 위 연필 아이콘(Edit) 클릭
-3. 아래 형태로 한 칸을 복사해서 추가:
-
-```json
-{
-  "code": "CAT01-04",
-  "category": "생활용품",
-  "name": "규격 이름",
-  "desc": "제품 한 줄 설명",
-  "image": null
-}
+```
+index.html                     ← 전체 페이지 (모든 섹션 포함)
+resources/
+  css/
+    setting.css                ← 폰트, 기본 변수 (거의 수정 불필요)
+    plugin.css                 ← Swiper 등 라이브러리 스타일 (수정 금지)
+    templatehouse.css          ← 프레임워크 공통 스타일 (수정 금지)
+    style.css                  ← 섹션별 레이아웃 스타일 (원본, 수정 비권장)
+    site-overrides.css         ← 삼원 브랜드 색상·배경 덮어쓰기 (여기를 수정하세요)
+  js/
+    plugin.js                  ← jQuery + GSAP + Swiper 번들 (수정 금지)
+    templatehouse.js, style.js, setting.js  ← 탭/슬라이드 동작 로직 (수정 금지)
+  images/
+    logo.png, logo_w.png       ← 헤더/푸터 로고 (업로드하신 로고로 교체됨)
+  images_custom/                ← 저희가 새로 만든 블루 톤 배경·아이콘 이미지
+  icons_custom/                 ← 체크포인트 아이콘, 파이프 규격 다이어그램
+  icons/                        ← 템플릿 기본 아이콘 (네이버/카카오 지도, 화살표 등)
 ```
 
-4. 쉼표(,)로 앞 항목과 구분되게 넣고 저장(`Commit changes`)
-5. 1분 이내로 홈페이지에 자동 반영됩니다
+**절대 건드리면 안 되는 파일**: `plugin.js`, `templatehouse.js`, `style.js`,
+`setting.js`, `templatehouse.css`, `plugin.css` — 이 파일들이 탭 전환, 슬라이드,
+모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 사이트가 깨질 수 있어요.
 
-`category` 이름을 새로 만들면(예: "전자제품") 필터 버튼도 자동으로 생깁니다.
-
-### 제품 사진 넣는 방법
-
-사진을 등록하지 않은 제품은 카테고리별 기본 아이콘이 대신 표시됩니다. 실제 제품
-사진을 넣고 싶다면:
-
-1. 저장소에 `images` 폴더를 새로 만들고 제품 사진 파일을 업로드 (예: `pvc-101.jpg`)
-2. `products.json`에서 해당 제품의 `"image": null` 부분을 아래처럼 경로로 교체
-   ```json
-   "image": "images/pvc-101.jpg"
-   ```
-3. 저장하면 그 제품 카드에만 사진이 표시됩니다 (나머지는 계속 아이콘으로 보임)
-
-가로:세로 4:3 비율에 가까운 사진이 카드에 가장 자연스럽게 맞습니다.
+**색상을 바꾸고 싶다면** `site-overrides.css`의 `:root` 안 `--primary`,
+`--secondary` 값만 바꾸면 버튼·포인트 색상이 전체적으로 바뀝니다.
 
 ---
 
-## 회사 정보(연락처, 소개 문구) 수정하는 방법
+## 섹션 구성 (위에서 아래 순서)
 
-1. `index.html` 파일을 열고 연필 아이콘(Edit) 클릭
-2. 다음 텍스트를 찾아 원하는 내용으로 바꾸기:
-   - 전화번호: `02-1234-5678`
-   - 이메일: `sales@daonpipe.co.kr`
-   - 주소: `서울특별시 중구 을지로 00길 00, 3층`
-   - 회사소개 문단, 통계 숫자(거래처 수, 취급 품목 수 등)
-3. 저장(`Commit changes`)
+| 섹션 | 내용 | id |
+|---|---|---|
+| 헤더 | 로고 + 메가메뉴(회사소개/제품안내/오시는 길/문의하기) | - |
+| 히어로 | 슬라이드 배너 + 메인 카피 | `#hero-section` |
+| 회사소개 | SOURCING → QUALITY TEST → CERTIFIED → DELIVERY 4단계 소개 | `#about-section` |
+| 왜 삼원인가 | 아이콘 5개 강점 소개 | `#checkpoint-section` |
+| 제품 규격 | 16/22/28/36mm 탭 전환식 규격 안내 | `#product-section` |
+| 오시는 길 | 본사·영업팀 주소 + 지도 링크 | `#location-section` |
+| 견적 문의 폼 | 담당자명/연락처/목적/문의내용 입력 폼 | `#contact-section` |
+| CTA 배너 | 전화·문의 바로가기 | `#cta-section` |
+| 푸터 | 주소, 연락처, 개인정보처리방침 | - |
+
+메뉴에 새 항목을 추가하려면 헤더 두 곳(PC용 `header-gnblist`, 모바일용
+`fullmenu-gnblist`) 모두에 `<li>` 항목을 추가하고, 이동시킬 섹션에
+`id="원하는이름"`을 지정한 뒤 `href="#원하는이름"`으로 연결하면 됩니다.
+
+---
+
+## 사진 교체하는 방법
+
+지금은 실제 사진이 없어서 **블루 톤 그라디언트 이미지**로 자리를 채워뒀습니다
+(`images_custom/` 폴더). 실제 사진이 생기면:
+
+1. `resources/images_custom/` 폴더에 새 사진 업로드
+2. `index.html`에서 아래 이미지들의 `src` 경로를 새 사진 파일명으로 교체
+
+   | 위치 | 현재 플레이스홀더 |
+   |---|---|
+   | 히어로 슬라이드 3장 | `hero_1.svg`, `hero_2.svg`, `hero_3.svg` |
+   | 회사소개 4단계 아이콘 | `about_1.svg` ~ `about_4.svg` |
+   | 오시는 길 지도 썸네일 | `map_thumb.svg` (2곳 동일 파일 사용 중) |
+
+3. 히어로 배경, CTA 배너 배경, 제품 규격 섹션 배경은 `site-overrides.css`에서
+   그라디언트로 처리되어 있습니다. 실제 사진으로 바꾸려면 해당 규칙의
+   `background: 그라디언트... !important;` 부분을
+   `background: url(../images_custom/파일명.jpg) no-repeat center/cover !important;`
+   로 바꿔주세요. (`.properties-N4`, `.properties-N7 .col-right .item`,
+   `.properties-N10` 규칙을 찾으면 됩니다)
+
+가로세로 비율은 정사각형(1:1)에 가까운 사진이 히어로·회사소개 영역에 가장 잘 맞습니다.
+
+---
+
+## 제품 추가하는 방법
+
+지금 구조는 4개 규격(16/22/28/36mm) 탭까지만 지원합니다. 규격을 더 추가하려면
+`index.html`의 `id="product-section"` 안에서 아래 3곳에 항목을 하나씩 늘려야 합니다
+(탭·좌측 정보·우측 썸네일 세 군데가 순서대로 짝이 맞아야 정상 작동합니다):
+
+1. `col-left` 안의 `info` 목록에 `<div class="item">` 블록 추가
+2. `col-right` 안의 `tabset-list`에 `<li class="tabset-item">` 탭 추가
+3. `col-right` 안의 `thumb`에 `<div class="item">` 이미지 블록 추가
+
+제품 종류가 많아질수록 관리가 번거로워질 수 있어요. 만약 제품이 계속 늘어날
+예정이라면, 이전에 만들어드렸던 **검색·카테고리 필터가 있는 별도 제품 목록
+페이지**(`products.json` 기반) 방식이 더 관리하기 쉬울 수 있습니다. 필요하시면
+이 템플릿 디자인에 맞춰 그 페이지를 다시 연결해드릴 수 있어요.
+
+---
+
+## GitHub Pages에 올리는 방법
+
+1. [github.com](https://github.com)에서 새 저장소 생성 (Public)
+2. `index.html`과 `resources` 폴더 전체를 저장소 루트에 업로드 (`Add file` → `Upload files`,
+   폴더째로 드래그)
+3. 저장소 `Settings` → `Pages` → Branch를 `main` / `/(root)`로 설정 → Save
+4. 1~2분 후 `https://내아이디.github.io/저장소이름/` 주소로 접속
 
 ---
 
 ## 문의 폼을 실제 이메일로 받기 (Formspree 연동)
 
-GitHub Pages는 서버가 없는 정적 사이트라, 문의 폼이 실제로 이메일을 보내려면
-무료 폼 서비스인 **Formspree**를 한 번만 연결해주면 됩니다.
+이 템플릿의 문의 폼은 원래 템플릿하우스 자체 서버(`api.imbackend.com`)로
+전송되는 구조였는데, 이는 템플릿하우스 계정에 연결된 사이트에서만 동작하는
+백엔드라 저희 쪽 GitHub Pages 배포본에서는 작동하지 않습니다. 그래서 이전에
+안내해드린 것처럼 **Formspree**(무료)로 교체해뒀습니다.
 
 1. [formspree.io](https://formspree.io) 무료 가입
 2. `New Form` 생성 → 받을 이메일 주소 입력
@@ -118,25 +126,38 @@ GitHub Pages는 서버가 없는 정적 사이트라, 문의 폼이 실제로 �
    `YOUR_FORM_ID`를 발급받은 값으로 교체
 5. 저장 후 홈페이지에서 폼을 한 번 테스트 제출하면 Formspree가 이메일로 알려줍니다
 
-무료 플랜은 월 50건까지 무료입니다. 문의가 더 많아지면 유료 플랜으로 전환하면 됩니다.
+무료 플랜은 월 50건까지 무료입니다.
 
 ---
 
-## 오시는 길 지도 바꾸는 방법
+## 오시는 길 지도 링크 수정하기
 
-1. [Google 지도](https://maps.google.com)에서 우리 회사 주소 검색
-2. `공유` → `지도 퍼가기(embed)` 탭 클릭 → HTML 코드 복사
-3. `index.html`에서 `<iframe src="https://www.google.com/maps?q=...` 부분을
-   복사한 코드로 통째로 교체
-4. 저장
+지금은 주소 텍스트를 기반으로 한 네이버/카카오 지도 검색 링크가 걸려있습니다.
+정확한 위치로 연결하고 싶다면:
+
+1. [네이버 지도](https://map.naver.com)에서 정확한 위치 검색 → `공유` → 단축 URL 복사
+2. [카카오맵](https://map.kakao.com)에서도 동일하게 단축 URL 복사
+3. `index.html`의 `#location-section` 안 `href="https://map.naver.com/..."`,
+   `href="https://map.kakao.com/..."` 부분을 복사한 단축 URL로 교체
+
+---
+
+## 회사 정보 수정하는 방법
+
+전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 `index.html`
+안에서 여러 곳(헤더 CTA 버튼 근처, 오시는 길, 문의 폼 개인정보 모달, CTA 배너,
+푸터)에 나눠서 들어있습니다. 브라우저의 찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해
+전체를 한 번에 바꾸시는 걸 추천드려요.
 
 ---
 
 ## 자주 묻는 질문
 
-- **파일을 더블클릭해서 열었더니 제품 목록이 안 보여요** → 정상입니다. `products.json`을
-  불러오는 기능은 GitHub Pages처럼 실제 웹 주소로 열었을 때만 동작합니다.
-- **수정한 내용이 사이트에 안 보여요** → 저장(Commit) 후 1~2분 기다렸다가 새로고침
-  (강력 새로고침: Ctrl+Shift+R / Cmd+Shift+R) 해보세요.
-- **도메인(예: daonpipe.com)을 연결하고 싶어요** → Settings → Pages 화면에서
-  `Custom domain`란에 보유한 도메인을 입력하면 됩니다. 단, 도메인 자체는 별도 구매(유료)가 필요합니다.
+- **탭을 눌러도 화면이 안 바뀌어요** → `resources/js/` 폴더 전체가 함께
+  업로드됐는지 확인해주세요. 이 폴더가 빠지면 탭 전환, 슬라이드, 모바일 메뉴가
+  전부 동작하지 않습니다.
+- **모바일에서 이상하게 보여요** → 이 템플릿은 반응형(모바일 대응)입니다. 다만
+  저희가 사진 없이 그라디언트로 채운 부분들은 모바일에서 비율이 다르게 보일 수
+  있으니, 실제 사진을 넣은 뒤 모바일 화면도 한 번 확인해보시길 권장해요.
+- **수정한 내용이 사이트에 안 보여요** → 저장(Commit) 후 1~2분 기다렸다가
+  강력 새로고침(Ctrl+Shift+R / Cmd+Shift+R) 해보세요.

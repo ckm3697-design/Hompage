@@ -59,3 +59,157 @@
   width: 6rem;
   height: 6rem;
 }
+
+/* ===== 현재 페이지 표시 (다중 페이지 내비게이션) =====
+   header-gnblink에 active 클래스가 붙은 항목(현재 보고 있는 페이지)에
+   호버 상태와 동일한 밑줄/색상을 항상 표시합니다. */
+.properties-N1 .header-gnblink.active span {
+  color: var(--primary);
+}
+.properties-N1 .header-gnblink.active span::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+  width: 100%;
+  height: 0.2rem;
+  background: var(--primary);
+  transform: scaleX(1);
+}
+.fullmenu-gnblink.active span {
+  color: var(--primary);
+}
+
+/* ===== 서브 페이지 좌측 소분류 이동 박스 =====
+   회사소개 / 제품안내처럼 하위 항목이 있는 페이지에서
+   좌측에 사각형 박스 형태로 소분류 이동 메뉴를 보여줍니다. */
+.subpage-layout {
+  display: flex;
+  gap: 4rem;
+  align-items: flex-start;
+}
+.subnav-box {
+  flex: 0 0 24rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.25);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: #ffffff;
+  position: sticky;
+  top: 12rem;
+}
+.subnav-box .subnav-title {
+  padding: 1.8rem 2rem;
+  background: var(--secondary);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+.subnav-list {
+  list-style: none;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.subnav-list a {
+  display: block;
+  padding: 1.2rem 1.4rem;
+  border-radius: 0.6rem;
+  font-size: 1.5rem;
+  color: #4B5560;
+  transition: background 0.2s, color 0.2s;
+}
+.subnav-list a:hover {
+  background: rgba(var(--primary-rgb), 0.08);
+  color: var(--primary);
+}
+.subnav-list a.active {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+.subpage-content {
+  flex: 1;
+  min-width: 0;
+}
+@media (max-width: 992px) {
+  .subpage-layout {
+    flex-direction: column;
+  }
+  .subnav-box {
+    position: static;
+    width: 100%;
+  }
+  .subnav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .subnav-list a {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+.subpage-wrap {
+  padding: 8rem 0;
+}
+
+/* 인사말 */
+.greeting-lead {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 2.4rem 0 3rem;
+  color: var(--secondary);
+}
+.greeting-desc p {
+  color: #54648A;
+  font-size: 1.55rem;
+  line-height: 1.8;
+  margin-bottom: 1.8rem;
+  max-width: 64rem;
+}
+.greeting-sign {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+.greeting-sign .p2 {
+  color: #54648A;
+}
+
+/* 회사 연혁 */
+.history-list {
+  list-style: none;
+  margin-top: 2.4rem;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+.history-item {
+  display: flex;
+  align-items: baseline;
+  gap: 2.4rem;
+  padding: 2rem 0.4rem;
+  border-bottom: 1px dotted rgba(var(--primary-rgb), 0.2);
+}
+.history-year {
+  flex: 0 0 8rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+.history-text {
+  font-size: 1.55rem;
+  color: #4B5560;
+}
+
+/* ===== 로고 색 반전 해제 =====
+   원본 템플릿은 헤더가 사진 위에 투명하게 떠 있을 때 로고를 흰색으로
+   반전시켰다가, 마우스를 올리면 원래 색으로 되돌리는 효과가 있었습니다.
+   삼원 로고는 그 반전 효과와 어울리지 않아 항상 원래 색 그대로 보이게 고정합니다. */
+.properties-N1.header-top-active .header-title img,
+.properties-N1.header-top-active:hover .header-title img {
+  filter: none !important;
+}

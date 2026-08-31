@@ -275,3 +275,139 @@
 .properties-N1.header-top-active:hover .header-right .ico-hamburger {
   background: var(--black) !important;
 }
+
+/* ===== 홈 화면 추가 섹션: 신뢰 배지 마퀴 ===== */
+.trust-marquee {
+  overflow: hidden;
+  background: var(--secondary);
+  padding: 1.8rem 0;
+}
+.trust-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 4.8rem;
+  animation: samwon-marquee 24s linear infinite;
+}
+.trust-marquee-track span {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.trust-marquee-track span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: inline-block;
+}
+@keyframes samwon-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trust-marquee-track { animation: none; }
+}
+
+/* ===== 홈 화면 추가 섹션: 왜 삼원인가 미리보기 ===== */
+.why-preview {
+  padding: 8rem 0;
+  background: transparent;
+}
+.why-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+  margin-top: 4rem;
+}
+.why-preview-card {
+  padding: 3.2rem 2.8rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  text-align: left;
+}
+.why-preview-card img {
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-bottom: 2rem;
+}
+.why-preview-card strong {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+.why-preview-card p {
+  color: #54648A;
+  line-height: 1.6;
+}
+.why-preview-more {
+  margin-top: 3.6rem;
+  text-align: center;
+}
+
+/* ===== 홈 화면 추가 섹션: 제품 카테고리 바로가기 타일 ===== */
+.product-tiles {
+  padding: 8rem 0;
+  background: transparent;
+}
+.product-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.product-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 3.6rem 2rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.product-tile:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  box-shadow: 0 16px 34px -18px rgba(var(--primary-rgb), 0.45);
+}
+.product-tile-img {
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.08);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.product-tile:hover .product-tile-img {
+  transform: scale(1.08) rotate(-4deg);
+}
+.product-tile-img img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+.product-tile-label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+@media (max-width: 992px) {
+  .why-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

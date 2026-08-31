@@ -205,6 +205,47 @@
   color: #4B5560;
 }
 
+/* 문의하기: 개인정보를 수집하지 않는 직접 연락 카드 */
+.contact-direct {
+  display: flex;
+  gap: 2.4rem;
+  margin-top: 3.2rem;
+  flex-wrap: wrap;
+}
+.contact-direct-card {
+  flex: 1 1 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 3.2rem 2.8rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.25);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.contact-direct-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 12px 30px -18px rgba(var(--primary-rgb), 0.5);
+  transform: translateY(-2px);
+}
+.contact-direct-card .cd-label {
+  font-size: 1.2rem;
+  color: var(--primary);
+  letter-spacing: 0.06em;
+}
+.contact-direct-card strong {
+  color: var(--secondary);
+}
+.contact-direct-card .cd-sub {
+  font-size: 1.4rem;
+  color: #54648A;
+}
+.contact-direct-note {
+  margin-top: 2.4rem;
+  font-size: 1.4rem;
+  color: #54648A;
+}
+
 /* ===== 로고 색 반전 해제 =====
    원본 템플릿은 헤더가 사진 위에 투명하게 떠 있을 때 로고를 흰색으로
    반전시켰다가, 마우스를 올리면 원래 색으로 되돌리는 효과가 있었습니다.
@@ -212,4 +253,25 @@
 .properties-N1.header-top-active .header-title img,
 .properties-N1.header-top-active:hover .header-title img {
   filter: none !important;
+}
+
+/* ===== 네비게이션 바 색상 고정 =====
+   원본 템플릿은 페이지 맨 위에 있을 때 헤더 배경이 투명해졌다가(히어로
+   사진 위에 겹쳐 보이도록), 스크롤하거나 마우스를 올리면 흰색으로
+   바뀌는 효과가 있었습니다. 이제 스크롤 위치와 상관없이 헤더 배경이
+   항상 흰색으로 고정되고, 메뉴 글자·햄버거 아이콘 색도 항상 어두운
+   색으로 고정됩니다. */
+.properties-N1,
+.properties-N1.header-top-active,
+.properties-N1.header-top-active:hover {
+  background: var(--white) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+.properties-N1.header-top-active .header-gnblink span,
+.properties-N1.header-top-active:hover .header-gnblink span {
+  color: var(--black) !important;
+}
+.properties-N1.header-top-active .header-right .ico-hamburger,
+.properties-N1.header-top-active:hover .header-right .ico-hamburger {
+  background: var(--black) !important;
 }

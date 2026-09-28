@@ -1,182 +1,275 @@
 # 삼원 홈페이지 (템플릿 기반) 관리 가이드
 
-업로드해주신 템플릿을 기반으로 만든 **4개 페이지로 나뉜 홈페이지**입니다.
-상단 메뉴를 누르면 같은 페이지 안에서 스크롤하는 게 아니라, 실제로 다른 HTML
-파일로 이동합니다. 헤더·푸터(로고, 메뉴, 연락처)는 4개 파일에 동일하게 들어있고,
-지금 보고 있는 메뉴 항목은 파란색 밑줄로 표시됩니다.
+상단 메뉴를 누르면 실제로 다른 HTML 파일로 이동하는 **다중 페이지 구조**입니다.
+회사소개·제품안내처럼 하위 항목이 있는 영역은 페이지 좌측에 **사각형 박스형
+소분류 이동 메뉴**가 있어서, 같은 대분류 안의 다른 페이지로 바로 이동할 수
+있습니다.
 
 jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있어서
 별도 설치 없이 GitHub Pages에 그대로 올리면 동작합니다.
 
-## 페이지 구성
+## 페이지 구성 (총 9개)
 
-| 파일 | 내용 |
-|---|---|
-| `index.html` | 홈 — 히어로 슬라이드 배너 + 하단 CTA 배너 |
-| `about.html` | 회사소개 — SOURCING~DELIVERY 4단계 소개 + 왜 삼원인가(체크포인트 5개) |
-| `products.html` | 제품안내 — 16/22/28/36mm 규격 탭 |
-| `contact.html` | 문의하기 — 오시는 길(지도) + 견적 문의 폼 + CTA 배너 |
+| 파일 | 내용 | 좌측 소분류 메뉴 |
+|---|---|---|
+| `index.html` | 홈 — 히어로(클릭 시 팝업) + 신뢰 배지 마퀴 + 왜 삼원인가 미리보기 + 제품 카테고리 타일 | 없음 |
+| `about.html` | 회사소개 &gt; 회사개요 + 왜 삼원인가 | 회사개요 / 인사말 / 회사 연혁 |
+| `about-greeting.html` | 회사소개 &gt; 인사말 (대표이사 사진 포함) | 〃 |
+| `about-history.html` | 회사소개 &gt; 회사 연혁 (세로 타임라인) | 〃 |
+| `products.html` | 제품안내 &gt; 난연 전선관(CD관) 품목표 | 4개 카테고리 |
+| `products-hi.html` | 제품안내 &gt; HI관 품목표 | 〃 |
+| `products-elp.html` | 제품안내 &gt; ELP관 품목표 | 〃 |
+| `products-fc.html` | 제품안내 &gt; FC통신관 품목표 | 〃 |
+| `contact.html` | 오시는 길(지도·주소) + 문의하기(연락처) 통합 페이지 | 없음 |
 
-메뉴에 새 페이지를 추가하려면: 새 HTML 파일을 만들고, **4개 파일 전부**의
-헤더(`header-gnblist`)와 모바일 메뉴(`fullmenu-gnblist`) 두 곳에 링크를
-추가해야 합니다 (정적 사이트라 자동으로 동기화되지 않아요).
+상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 9개 페이지로 정확히 연결되어
+있습니다. "오시는 길"과 "문의하기"는 같은 `contact.html` 파일 안의 서로 다른
+섹션(`#location-section`, `#contact-section`)으로 연결됩니다. 지금 보고 있는
+대분류 메뉴는 파란 밑줄로, 좌측 소분류 메뉴는 파란 배경으로 현재 위치가
+표시됩니다.
 
 ## 파일 구성
 
 ```
-index.html, about.html, products.html, contact.html   ← 4개 페이지
+index.html, about.html, about-greeting.html, about-history.html,
+products.html, products-hi.html, products-elp.html,
+products-fc.html, contact.html      ← 9개 페이지
 resources/
   css/
     setting.css                ← 폰트, 기본 변수 (거의 수정 불필요)
     plugin.css                 ← Swiper 등 라이브러리 스타일 (수정 금지)
     templatehouse.css          ← 프레임워크 공통 스타일 (수정 금지)
     style.css                  ← 섹션별 레이아웃 스타일 (원본, 수정 비권장)
-    site-overrides.css         ← 삼원 브랜드 색상·배경·현재 페이지 표시 (여기를 수정하세요)
+    site-overrides.css         ← 삼원 브랜드 색상 · 로고 · 소분류 박스 등
+                                   (여기를 수정하세요)
   js/
     plugin.js                  ← jQuery + GSAP + Swiper 번들 (수정 금지)
     templatehouse.js, style.js, setting.js  ← 탭/슬라이드 동작 로직 (수정 금지)
+    site-custom.js              ← 홈페이지 추가 섹션의 스크롤 애니메이션 (여기서 확장하세요)
   images/
-    logo.png, logo_w.png       ← 헤더/푸터 로고 (업로드하신 로고로 교체됨)
-  images_custom/                ← 저희가 새로 만든 블루 톤 배경·아이콘 이미지
-  icons_custom/                 ← 체크포인트 아이콘, 파이프 규격 다이어그램
-  icons/                        ← 템플릿 기본 아이콘 (네이버/카카오 지도, 화살표 등)
+    logo.png, logo_w.png       ← 헤더/푸터 로고
+  images_custom/                ← 블루 톤 배경 이미지 (히어로, 회사소개 아이콘)
+  icons_custom/                 ← 체크포인트 아이콘, 제품 규격 다이어그램
+  icons/                        ← 템플릿 기본 아이콘 (네이버/카카오 지도, 닫기 등)
 ```
 
 **절대 건드리면 안 되는 파일**: `plugin.js`, `templatehouse.js`, `style.js`,
 `setting.js`, `templatehouse.css`, `plugin.css` — 이 파일들이 탭 전환, 슬라이드,
-모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 4개 페이지 전부에서
+모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 9개 페이지 전부에서
 동작이 깨질 수 있어요.
 
 **색상을 바꾸고 싶다면** `site-overrides.css`의 `:root` 안 `--primary`,
-`--secondary` 값만 바꾸면 버튼·포인트 색상이 4개 페이지 전체에서 한 번에 바뀝니다.
+`--secondary` 값만 바꾸면 버튼·포인트 색상이 9개 페이지 전체에서 한 번에
+바뀝니다.
 
 ---
 
-## 섹션이 어느 페이지에 있는지
+## 홈페이지 구성 (히어로 팝업 · 마퀴 · 미리보기 · 타일)
 
-| 섹션 | 내용 | 위치 |
-|---|---|---|
-| 헤더 | 로고 + 메가메뉴 | 4개 페이지 공통 |
-| 히어로 | 슬라이드 배너 + 메인 카피 | `index.html` (`#hero-section`) |
-| 회사소개 | SOURCING → QUALITY TEST → CERTIFIED → DELIVERY 4단계 소개 | `#about-section` |
-| 왜 삼원인가 | 아이콘 5개 강점 소개 | `about.html` (`#checkpoint-section`) |
-| 제품 규격 | 16/22/28/36mm 탭 전환식 규격 안내 | `products.html` (`#product-section`) |
-| 오시는 길 | 본사·영업팀 주소 + 지도 링크 | `contact.html` (`#location-section`) |
-| 견적 문의 폼 | 담당자명/연락처/목적/문의내용 입력 폼 | `contact.html` (`#contact-section`) |
-| CTA 배너 | 전화·문의 바로가기 | `index.html`, `contact.html` (`#cta-section`) |
-| 푸터 | 주소, 연락처, 개인정보처리방침 | 4개 페이지 공통 |
+`index.html`은 히어로 아래로 다음 순서로 구성되어 있습니다:
 
-메뉴에 새 페이지를 추가하려면 **4개 파일 전부**에서 헤더 두 곳(PC용
-`header-gnblist`, 모바일용 `fullmenu-gnblist`)에 `<li>` 항목을 추가하고
-`href="새파일명.html"`로 연결하면 됩니다.
+0. **히어로 슬라이드** — 슬라이드를 클릭하면 다른 페이지로 이동하지 않고
+   **팝업창(모달)**이 열려서 간단한 설명을 보여줍니다. 팝업 안의 버튼을
+   눌러야 실제 페이지로 이동합니다. 슬라이드별 팝업 내용은 `index.html`에서
+   `data-modal-id="hero-modal-1"`(2, 3)로 찾을 수 있습니다.
+1. **신뢰 배지 마퀴** — "KS 인증", "난연 2급 인증" 같은 문구가 좌우로 끊임없이
+   흐르는 띠입니다. 실제 거래처 수 같은 과장하기 쉬운 숫자 대신, 사실에
+   기반한 인증·품질 관련 문구로 채웠습니다. 문구를 바꾸려면 `trust-marquee-track`
+   안의 `<span>` 목록을 수정하면 됩니다 (앞뒤로 두 번 반복되어 있어야 끊김
+   없이 흐릅니다 — 하나를 고치면 반복된 두 곳 모두 똑같이 고쳐주세요).
+2. **왜 삼원인가 미리보기** — `about.html`의 체크포인트 중 3가지를 뽑아 카드로
+   보여주고, "더 알아보기" 버튼으로 연결했습니다. 스크롤해서 화면에 들어오면
+   아래에서 위로 살짝 올라오며 나타나는 애니메이션이 적용되어 있어요.
+3. **제품 카테고리 바로가기 타일** — 4개 카테고리 페이지로 바로 이동하는
+   타일입니다. 마우스를 올리면 살짝 떠오르고 아이콘이 회전하는 효과가 있어요.
 
+이 애니메이션은 `class="reveal-up"`이 붙은 요소라면 어디에나 적용됩니다.
+새 섹션에도 같은 효과를 쓰고 싶다면 해당 요소에 `reveal-up` 클래스만
+추가하면 되고, `resources/js/site-custom.js`는 수정할 필요 없습니다.
+
+> 원래 맨 아래 있던 "현장에 필요한 자재, 지금 문의하세요" CTA 배너는
+> `contact.html`의 연락처 안내와 내용이 겹쳐서 삭제했습니다.
+
+---
+
+## 서브 페이지 상단 배너
+
+헤더가 항상 고정되어 있다 보니, 배너 없이 바로 본문이 시작되면 내용이 헤더에
+너무 가깝게 붙어 보이는 문제가 있었습니다. 그래서 `about.html`, `products.html`
+등 홈을 제외한 8개 페이지 전부에 그라디언트 배경 + 아이콘 + 페이지 제목으로
+구성된 짧은 배너를 넣어서, 본문이 시작되는 위치를 화면 중간쯤으로 자연스럽게
+내렸습니다.
+
+```html
+<div class="page-banner">
+  <div class="page-banner-icon">
+    <img src="./resources/icons_custom/ico_calendar.svg" alt="" />
+  </div>
+  <div class="page-banner-inner container-md">
+    <span class="page-banner-eyebrow">HISTORY</span>
+    <h1 class="page-banner-title">회사 연혁</h1>
+  </div>
+</div>
+```
+
+제목이나 아이콘을 바꾸려면 해당 페이지에서 `page-banner-eyebrow`(영문 라벨),
+`page-banner-title`(제목), `page-banner-icon` 안의 `src` 경로를 수정하면
+됩니다. 아이콘은 `icons_custom` 폴더 안의 SVG 파일 아무거나 써도 되고, 실제
+사진을 넣고 싶다면 같은 자리에 사진 파일 경로로 바꿔주면 됩니다 (배경이
+진한 남색이라 밝은 톤 사진이 잘 어울립니다).
+
+---
+
+## 소분류 이동 박스 (좌측 사각형 메뉴)
+
+`about.html`, `products.html` 등 하위 항목이 있는 페이지에는 이런 구조가
+들어있습니다:
+
+```html
+<aside class="subnav-box">
+  <div class="subnav-title">회사소개</div>
+  <ul class="subnav-list">
+    <li><a class="active" href="about.html">회사개요</a></li>
+    <li><a href="about-greeting.html">인사말</a></li>
+    <li><a href="about-history.html">회사 연혁</a></li>
+  </ul>
+</aside>
+```
+
+- 현재 페이지에 해당하는 `<a>`에 `class="active"`를 넣으면 파란 배경으로
+  강조됩니다.
+- 새 소분류를 추가하려면: ① 새 HTML 파일을 만들고 ② **같은 그룹의 모든
+  페이지**(회사소개라면 3개 파일 전부)의 `subnav-list`에 `<li>` 항목을
+  똑같이 추가해야 합니다. 한 파일에만 추가하면 페이지마다 메뉴가 달라 보여요.
+
+---
+
+## 회사 연혁 항목 추가하는 방법 (세로 타임라인 디자인)
+
+`about-history.html`에서 아래 형태를 복사해서 원하는 위치에 추가하면 됩니다
+(최신 연도가 위로 오도록 정렬되어 있어요):
+
+```html
+<div class="timeline-row reveal-up">
+  <div class="timeline-dot">2027</div>
+  <div class="timeline-card">
+    <strong>태그(영문 라벨)</strong>
+    <p>새로운 소식을 여기에 입력</p>
+  </div>
+</div>
+```
+
+`<strong>` 안의 영문 태그(NEW, CERTIFICATION 등)는 짧은 카테고리 표시용이라
+비워둬도 되고, 원하는 단어로 바꿔도 됩니다.
+
+## 인사말 문구 · 대표이사 사진 수정하는 방법
+
+`about-greeting.html`에서 `greeting-lead`(첫 인사말 한 줄), `greeting-desc`
+안의 `<p>` 문단들, 하단의 대표이사 이름을 찾아 바꾸면 됩니다.
+
+우측 상단 사진 자리는 `images_custom` 폴더에 `ceo-photo.jpg`라는 이름으로
+사진을 올리기만 하면 자동으로 채워집니다 (지금은 파일이 없어서 "대표이사
+사진 준비중입니다" 안내만 보여요). 다른 파일명을 쓰고 싶다면
+`about-greeting.html`의 `<img src="./resources/images_custom/ceo-photo.jpg"`
+부분의 경로를 바꿔주세요.
+
+## 제품 품목 추가·수정하는 방법
+
+제품안내 4개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
+그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요.
+표의 한 줄은 아래 형태입니다:
+
+```html
+<tr>
+  <td class="col-item">품목명</td>
+  <td class="col-size">16C · 22C · 28C</td>
+  <td class="col-note">비고(없으면 -)</td>
+</tr>
+```
+
+- 품목을 추가하려면 `<tr>...</tr>` 한 덩어리를 복사해서 `<tbody>` 안에 붙여넣고 내용만 바꾸세요.
+- 제품 상세 설명이나 사진을 넣고 싶으시면 알려주시면 이 표에 맞춰 반영해드릴게요.
+- 새 카테고리를 추가하려면 4개 제품 페이지 전부의 좌측 소분류 메뉴와 헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다.
 ---
 
 ## 사진 교체하는 방법
 
 지금은 실제 사진이 없어서 **블루 톤 그라디언트 이미지**로 자리를 채워뒀습니다
-(`images_custom/` 폴더). 실제 사진이 생기면:
-
-1. `resources/images_custom/` 폴더에 새 사진 업로드
-2. `index.html`에서 아래 이미지들의 `src` 경로를 새 사진 파일명으로 교체
-
-   | 위치 | 현재 플레이스홀더 |
-   |---|---|
-   | 히어로 슬라이드 3장 | `hero_1.svg`, `hero_2.svg`, `hero_3.svg` |
-   | 회사소개 4단계 아이콘 | `about_1.svg` ~ `about_4.svg` |
-   | 오시는 길 지도 썸네일 | `map_thumb.svg` (2곳 동일 파일 사용 중) |
-
-3. 히어로 배경, CTA 배너 배경, 제품 규격 섹션 배경은 `site-overrides.css`에서
-   그라디언트로 처리되어 있습니다. 실제 사진으로 바꾸려면 해당 규칙의
-   `background: 그라디언트... !important;` 부분을
-   `background: url(../images_custom/파일명.jpg) no-repeat center/cover !important;`
-   로 바꿔주세요. (`.properties-N4`, `.properties-N7 .col-right .item`,
-   `.properties-N10` 규칙을 찾으면 됩니다)
-
-가로세로 비율은 정사각형(1:1)에 가까운 사진이 히어로·회사소개 영역에 가장 잘 맞습니다.
-
----
-
-## 제품 추가하는 방법
-
-지금 구조는 4개 규격(16/22/28/36mm) 탭까지만 지원합니다. 규격을 더 추가하려면
-`products.html`의 `id="product-section"` 안에서 아래 3곳에 항목을 하나씩 늘려야 합니다
-(탭·좌측 정보·우측 썸네일 세 군데가 순서대로 짝이 맞아야 정상 작동합니다):
-
-1. `col-left` 안의 `info` 목록에 `<div class="item">` 블록 추가
-2. `col-right` 안의 `tabset-list`에 `<li class="tabset-item">` 탭 추가
-3. `col-right` 안의 `thumb`에 `<div class="item">` 이미지 블록 추가
-
-제품 종류가 많아질수록 관리가 번거로워질 수 있어요. 만약 제품이 계속 늘어날
-예정이라면, 이전에 만들어드렸던 **검색·카테고리 필터가 있는 별도 제품 목록
-페이지**(`products.json` 기반) 방식이 더 관리하기 쉬울 수 있습니다. 필요하시면
-이 템플릿 디자인에 맞춰 그 페이지를 다시 연결해드릴 수 있어요.
+(`images_custom/`, `icons_custom/` 폴더). 실제 사진이 생기면 해당 파일을
+같은 이름으로 덮어쓰거나, HTML의 `src` 경로를 새 파일명으로 교체해주세요.
+가로세로 비율은 정사각형(1:1)에 가까운 사진이 가장 잘 맞습니다.
 
 ---
 
 ## GitHub Pages에 올리는 방법
 
 1. [github.com](https://github.com)에서 새 저장소 생성 (Public)
-2. `index.html`, `about.html`, `products.html`, `contact.html`과 `resources` 폴더
-   전체를 저장소 루트에 업로드 (`Add file` → `Upload files`, 폴더째로 드래그)
+2. 9개 HTML 파일과 `resources` 폴더 전체를 저장소 루트에 업로드
+   (`Add file` → `Upload files`, 폴더째로 드래그)
 3. 저장소 `Settings` → `Pages` → Branch를 `main` / `/(root)`로 설정 → Save
 4. 1~2분 후 `https://내아이디.github.io/저장소이름/` 주소로 접속
 
 ---
 
-## 문의 폼을 실제 이메일로 받기 (Formspree 연동)
+## 오시는 길 · 문의하기 통합 페이지 (개인정보 미수집 방식)
 
-이 템플릿의 문의 폼은 원래 템플릿하우스 자체 서버(`api.imbackend.com`)로
-전송되는 구조였는데, 이는 템플릿하우스 계정에 연결된 사이트에서만 동작하는
-백엔드라 저희 쪽 GitHub Pages 배포본에서는 작동하지 않습니다. 그래서 이전에
-안내해드린 것처럼 **Formspree**(무료)로 교체해뒀습니다.
+"오시는 길"과 "문의하기"는 이제 `contact.html` 한 페이지 안에 위아래로 함께
+들어있습니다 (위: 지도·주소, 아래: 연락처 카드). 상단 메뉴에서 두 항목 중
+아무거나 눌러도 이 페이지로 이동하고, 해당 섹션 위치로 자동 스크롤됩니다.
 
-1. [formspree.io](https://formspree.io) 무료 가입
-2. `New Form` 생성 → 받을 이메일 주소 입력
-3. 발급된 주소가 `https://formspree.io/f/abcdwxyz` 형태로 나옵니다
-4. `contact.html`에서 아래 부분을 찾아
-   ```html
-   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-   ```
-   `YOUR_FORM_ID`를 발급받은 값으로 교체
-5. 저장 후 홈페이지에서 폼을 한 번 테스트 제출하면 Formspree가 이메일로 알려줍니다
+보안을 위해 이름·연락처 등을 입력받는 문의 양식은 두지 않았습니다. 전화번호와
+이메일을 보여주는 **연락 카드**만 있고, 클릭해도 전화 앱이나 메일 앱이 열리지
+않는 단순 텍스트 표시입니다 (탭하면 앱 선택 팝업이 뜨는 것도 원치 않으신다는
+요청에 따라, 일부러 클릭 동작 없이 정보만 보이도록 만들었습니다). 방문자가
+번호나 주소를 직접 보고 입력해 연락하는 방식이라, 홈페이지 자체는 어떤
+개인정보도 입력받거나 저장하지 않습니다.
 
-무료 플랜은 월 50건까지 무료입니다.
+전화번호나 이메일을 바꾸고 싶다면 `contact.html`에서 아래 부분을 찾아
+수정하면 됩니다:
+
+```html
+<div class="contact-direct-card">
+  <span class="cd-label mono">TEL</span>
+  <strong class="h4">02-1234-5678</strong>
+  ...
+```
+
+같은 이유로 원래 템플릿에 있던 개인정보 수집동의 체크박스, 개인정보
+처리방침 모달, 이메일 무단수집 거부 안내 등 개인정보 관련 내용은 10개
+페이지 전부에서 삭제했습니다.
 
 ---
 
 ## 오시는 길 지도 링크 수정하기
 
-지금은 주소 텍스트를 기반으로 한 네이버/카카오 지도 검색 링크가 걸려있습니다.
-정확한 위치로 연결하고 싶다면:
-
 1. [네이버 지도](https://map.naver.com)에서 정확한 위치 검색 → `공유` → 단축 URL 복사
 2. [카카오맵](https://map.kakao.com)에서도 동일하게 단축 URL 복사
-3. `contact.html`의 `#location-section` 안 `href="https://map.naver.com/..."`,
+3. `contact.html`(`#location-section` 부분)의 `href="https://map.naver.com/..."`,
    `href="https://map.kakao.com/..."` 부분을 복사한 단축 URL로 교체
 
 ---
 
 ## 회사 정보 수정하는 방법
 
-전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **4개 페이지
-전부**의 헤더·푸터에 공통으로 들어있고, `contact.html`에는 오시는 길과 문의 폼
-개인정보 모달에도 들어있습니다. 파일마다 브라우저의 찾기(Ctrl+F / Cmd+F)로
-옛 값을 검색해 하나씩 바꿔주세요.
+전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **9개 페이지
+전부**의 헤더·푸터에 공통으로 들어있고, `contact.html`에는 오시는 길·연락
+카드에도 들어있습니다. 파일마다 브라우저의
+찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.
 
 ---
 
 ## 자주 묻는 질문
 
 - **탭을 눌러도 화면이 안 바뀌어요** → `resources/js/` 폴더 전체가 함께
-  업로드됐는지 확인해주세요. 이 폴더가 빠지면 탭 전환, 슬라이드, 모바일 메뉴가
-  전부 동작하지 않습니다.
-- **모바일에서 이상하게 보여요** → 이 템플릿은 반응형(모바일 대응)입니다. 다만
-  저희가 사진 없이 그라디언트로 채운 부분들은 모바일에서 비율이 다르게 보일 수
-  있으니, 실제 사진을 넣은 뒤 모바일 화면도 한 번 확인해보시길 권장해요.
+  업로드됐는지 확인해주세요.
+- **로고 색이 이상하게 보여요** → 헤더가 맨 위(사진 위 투명 상태)에 있을 때
+  로고 색이 반전되던 원본 템플릿 효과는 `site-overrides.css`에서 이미
+  꺼뒀습니다. 그래도 이상하면 이 파일이 제대로 업로드됐는지 확인해주세요.
+- **상단 네비게이션 바 색이 스크롤에 따라 바뀌었으면 좋겠어요** → 지금은
+  요청에 따라 항상 흰색으로 고정되어 있습니다. `site-overrides.css`에서
+  "네비게이션 바 색상 고정" 부분을 지우면 원래 템플릿의 투명→흰색 전환
+  효과로 되돌릴 수 있습니다.
+- **소분류 메뉴에서 현재 페이지가 강조 표시 안 돼요** → 해당 `<a>` 태그에
+  `class="active"`가 붙어 있는지 확인해주세요.
 - **수정한 내용이 사이트에 안 보여요** → 저장(Commit) 후 1~2분 기다렸다가
   강력 새로고침(Ctrl+Shift+R / Cmd+Shift+R) 해보세요.
-- **메뉴에 새 페이지를 추가했는데 현재 페이지 표시가 안 돼요** → 헤더 메뉴
-  링크(`<a class="header-gnblink">`)에 `active` 클래스를 함께 추가해야
-  파란 밑줄이 표시됩니다. 다른 페이지의 헤더 코드를 참고해 같은 방식으로
-  추가해주세요.

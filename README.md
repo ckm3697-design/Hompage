@@ -8,31 +8,32 @@
 jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있어서
 별도 설치 없이 GitHub Pages에 그대로 올리면 동작합니다.
 
-## 페이지 구성 (총 10개)
+## 페이지 구성 (총 9개)
 
 | 파일 | 내용 | 좌측 소분류 메뉴 |
 |---|---|---|
-| `index.html` | 홈 — 히어로 + 신뢰 배지 마퀴 + 왜 삼원인가 미리보기 + 제품 카테고리 타일 + CTA 배너 | 없음 |
+| `index.html` | 홈 — 히어로(클릭 시 팝업) + 신뢰 배지 마퀴 + 왜 삼원인가 미리보기 + 제품 카테고리 타일 | 없음 |
 | `about.html` | 회사소개 &gt; 회사개요 + 왜 삼원인가 | 회사개요 / 인사말 / 회사 연혁 |
-| `about-greeting.html` | 회사소개 &gt; 인사말 | 〃 |
-| `about-history.html` | 회사소개 &gt; 회사 연혁 | 〃 |
-| `products.html` | 제품안내 &gt; 난연 PVC 파이프 (16/22/28/36mm 탭) | 4개 카테고리 |
-| `products-fire.html` | 제품안내 &gt; 소방 배관자재 | 〃 |
-| `products-fitting.html` | 제품안내 &gt; 이음관·부속자재 | 〃 |
-| `products-insulation.html` | 제품안내 &gt; 보온·단열자재 | 〃 |
-| `location.html` | 오시는 길 — 지도, 주소 | 없음 |
-| `contact.html` | 문의하기 — 견적 문의 폼 + CTA | 없음 |
+| `about-greeting.html` | 회사소개 &gt; 인사말 (대표이사 사진 포함) | 〃 |
+| `about-history.html` | 회사소개 &gt; 회사 연혁 (세로 타임라인) | 〃 |
+| `products.html` | 제품안내 &gt; 난연 전선관(CD관) 품목표 | 4개 카테고리 |
+| `products-hi.html` | 제품안내 &gt; HI관 품목표 | 〃 |
+| `products-elp.html` | 제품안내 &gt; ELP관 품목표 | 〃 |
+| `products-fc.html` | 제품안내 &gt; FC통신관 품목표 | 〃 |
+| `contact.html` | 오시는 길(지도·주소) + 문의하기(연락처) 통합 페이지 | 없음 |
 
-상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 10개 페이지로 정확히 연결되어
-있고, 지금 보고 있는 대분류 메뉴는 파란 밑줄로, 좌측 소분류 메뉴는 파란
-배경으로 현재 위치가 표시됩니다.
+상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 9개 페이지로 정확히 연결되어
+있습니다. "오시는 길"과 "문의하기"는 같은 `contact.html` 파일 안의 서로 다른
+섹션(`#location-section`, `#contact-section`)으로 연결됩니다. 지금 보고 있는
+대분류 메뉴는 파란 밑줄로, 좌측 소분류 메뉴는 파란 배경으로 현재 위치가
+표시됩니다.
 
 ## 파일 구성
 
 ```
 index.html, about.html, about-greeting.html, about-history.html,
-products.html, products-fire.html, products-fitting.html,
-products-insulation.html, location.html, contact.html      ← 10개 페이지
+products.html, products-hi.html, products-elp.html,
+products-fc.html, contact.html      ← 9개 페이지
 resources/
   css/
     setting.css                ← 폰트, 기본 변수 (거의 수정 불필요)
@@ -54,20 +55,23 @@ resources/
 
 **절대 건드리면 안 되는 파일**: `plugin.js`, `templatehouse.js`, `style.js`,
 `setting.js`, `templatehouse.css`, `plugin.css` — 이 파일들이 탭 전환, 슬라이드,
-모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 10개 페이지 전부에서
+모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 9개 페이지 전부에서
 동작이 깨질 수 있어요.
 
 **색상을 바꾸고 싶다면** `site-overrides.css`의 `:root` 안 `--primary`,
-`--secondary` 값만 바꾸면 버튼·포인트 색상이 10개 페이지 전체에서 한 번에
+`--secondary` 값만 바꾸면 버튼·포인트 색상이 9개 페이지 전체에서 한 번에
 바뀝니다.
 
 ---
 
-## 홈페이지에 추가한 섹션 (마퀴 · 미리보기 · 타일)
+## 홈페이지 구성 (히어로 팝업 · 마퀴 · 미리보기 · 타일)
 
-첫 화면이 히어로 하나로 끝나면 밋밋해서, 히어로와 CTA 배너 사이에 세 가지를
-추가했습니다 (모두 `index.html` 안에 있습니다):
+`index.html`은 히어로 아래로 다음 순서로 구성되어 있습니다:
 
+0. **히어로 슬라이드** — 슬라이드를 클릭하면 다른 페이지로 이동하지 않고
+   **팝업창(모달)**이 열려서 간단한 설명을 보여줍니다. 팝업 안의 버튼을
+   눌러야 실제 페이지로 이동합니다. 슬라이드별 팝업 내용은 `index.html`에서
+   `data-modal-id="hero-modal-1"`(2, 3)로 찾을 수 있습니다.
 1. **신뢰 배지 마퀴** — "KS 인증", "난연 2급 인증" 같은 문구가 좌우로 끊임없이
    흐르는 띠입니다. 실제 거래처 수 같은 과장하기 쉬운 숫자 대신, 사실에
    기반한 인증·품질 관련 문구로 채웠습니다. 문구를 바꾸려면 `trust-marquee-track`
@@ -82,6 +86,37 @@ resources/
 이 애니메이션은 `class="reveal-up"`이 붙은 요소라면 어디에나 적용됩니다.
 새 섹션에도 같은 효과를 쓰고 싶다면 해당 요소에 `reveal-up` 클래스만
 추가하면 되고, `resources/js/site-custom.js`는 수정할 필요 없습니다.
+
+> 원래 맨 아래 있던 "현장에 필요한 자재, 지금 문의하세요" CTA 배너는
+> `contact.html`의 연락처 안내와 내용이 겹쳐서 삭제했습니다.
+
+---
+
+## 서브 페이지 상단 배너
+
+헤더가 항상 고정되어 있다 보니, 배너 없이 바로 본문이 시작되면 내용이 헤더에
+너무 가깝게 붙어 보이는 문제가 있었습니다. 그래서 `about.html`, `products.html`
+등 홈을 제외한 8개 페이지 전부에 그라디언트 배경 + 아이콘 + 페이지 제목으로
+구성된 짧은 배너를 넣어서, 본문이 시작되는 위치를 화면 중간쯤으로 자연스럽게
+내렸습니다.
+
+```html
+<div class="page-banner">
+  <div class="page-banner-icon">
+    <img src="./resources/icons_custom/ico_calendar.svg" alt="" />
+  </div>
+  <div class="page-banner-inner container-md">
+    <span class="page-banner-eyebrow">HISTORY</span>
+    <h1 class="page-banner-title">회사 연혁</h1>
+  </div>
+</div>
+```
+
+제목이나 아이콘을 바꾸려면 해당 페이지에서 `page-banner-eyebrow`(영문 라벨),
+`page-banner-title`(제목), `page-banner-icon` 안의 `src` 경로를 수정하면
+됩니다. 아이콘은 `icons_custom` 폴더 안의 SVG 파일 아무거나 써도 되고, 실제
+사진을 넣고 싶다면 같은 자리에 사진 파일 경로로 바꿔주면 됩니다 (배경이
+진한 남색이라 밝은 톤 사진이 잘 어울립니다).
 
 ---
 
@@ -109,36 +144,52 @@ resources/
 
 ---
 
-## 회사 연혁 항목 추가하는 방법
+## 회사 연혁 항목 추가하는 방법 (세로 타임라인 디자인)
 
 `about-history.html`에서 아래 형태를 복사해서 원하는 위치에 추가하면 됩니다
 (최신 연도가 위로 오도록 정렬되어 있어요):
 
 ```html
-<li class="history-item">
-  <span class="history-year">2027</span>
-  <span class="history-text">새로운 소식을 여기에 입력</span>
-</li>
+<div class="timeline-row reveal-up">
+  <div class="timeline-dot">2027</div>
+  <div class="timeline-card">
+    <strong>태그(영문 라벨)</strong>
+    <p>새로운 소식을 여기에 입력</p>
+  </div>
+</div>
 ```
 
-## 인사말 문구 수정하는 방법
+`<strong>` 안의 영문 태그(NEW, CERTIFICATION 등)는 짧은 카테고리 표시용이라
+비워둬도 되고, 원하는 단어로 바꿔도 됩니다.
+
+## 인사말 문구 · 대표이사 사진 수정하는 방법
 
 `about-greeting.html`에서 `greeting-lead`(첫 인사말 한 줄), `greeting-desc`
 안의 `<p>` 문단들, 하단의 대표이사 이름을 찾아 바꾸면 됩니다.
 
-## 제품 규격/항목 추가하는 방법
+우측 상단 사진 자리는 `images_custom` 폴더에 `ceo-photo.jpg`라는 이름으로
+사진을 올리기만 하면 자동으로 채워집니다 (지금은 파일이 없어서 "대표이사
+사진 준비중입니다" 안내만 보여요). 다른 파일명을 쓰고 싶다면
+`about-greeting.html`의 `<img src="./resources/images_custom/ceo-photo.jpg"`
+부분의 경로를 바꿔주세요.
 
-각 카테고리 페이지(`products.html`, `products-fire.html` 등)는 탭 형태로
-구성되어 있습니다. 항목을 추가하려면 `col-left`의 `info` 목록, `col-right`의
-`tabset-list` 탭, `col-right`의 `thumb` 이미지 블록 — 이 세 곳에 순서를 맞춰
-항목을 하나씩 늘려야 합니다 (순서가 어긋나면 탭을 눌렀을 때 다른 정보가
-표시돼요).
+## 제품 품목 추가·수정하는 방법
 
-새 카테고리 자체를 추가하려면(예: "밸브류"): 기존 카테고리 페이지 하나를
-복사해서 내용을 바꾼 뒤, **`products` 관련 4개 페이지 전부**의 소분류 메뉴에
-새 항목을 추가하고, 헤더 메가메뉴·모바일 풀메뉴의 "제품안내" 하위 목록에도
-링크를 추가해주세요.
+제품안내 4개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
+그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요.
+표의 한 줄은 아래 형태입니다:
 
+```html
+<tr>
+  <td class="col-item">품목명</td>
+  <td class="col-size">16C · 22C · 28C</td>
+  <td class="col-note">비고(없으면 -)</td>
+</tr>
+```
+
+- 품목을 추가하려면 `<tr>...</tr>` 한 덩어리를 복사해서 `<tbody>` 안에 붙여넣고 내용만 바꾸세요.
+- 제품 상세 설명이나 사진을 넣고 싶으시면 알려주시면 이 표에 맞춰 반영해드릴게요.
+- 새 카테고리를 추가하려면 4개 제품 페이지 전부의 좌측 소분류 메뉴와 헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다.
 ---
 
 ## 사진 교체하는 방법
@@ -153,30 +204,35 @@ resources/
 ## GitHub Pages에 올리는 방법
 
 1. [github.com](https://github.com)에서 새 저장소 생성 (Public)
-2. 10개 HTML 파일과 `resources` 폴더 전체를 저장소 루트에 업로드
+2. 9개 HTML 파일과 `resources` 폴더 전체를 저장소 루트에 업로드
    (`Add file` → `Upload files`, 폴더째로 드래그)
 3. 저장소 `Settings` → `Pages` → Branch를 `main` / `/(root)`로 설정 → Save
 4. 1~2분 후 `https://내아이디.github.io/저장소이름/` 주소로 접속
 
 ---
 
-## 문의하기 페이지 (개인정보 미수집 방식)
+## 오시는 길 · 문의하기 통합 페이지 (개인정보 미수집 방식)
 
-보안을 위해 홈페이지에서는 이름·연락처 등을 입력받는 문의 양식을 두지 않기로
-했습니다. 그래서 `contact.html`은 데이터를 입력받는 폼 대신, 전화번호와
-이메일을 눌러서 바로 연결되는 **연락 카드** 두 개로 구성되어 있습니다
-(`tel:`, `mailto:` 링크 — 방문자가 직접 전화 앱이나 메일 앱을 열어 연락하는
-방식이라, 홈페이지 자체는 어떤 개인정보도 입력받거나 저장하지 않습니다).
+"오시는 길"과 "문의하기"는 이제 `contact.html` 한 페이지 안에 위아래로 함께
+들어있습니다 (위: 지도·주소, 아래: 연락처 카드). 상단 메뉴에서 두 항목 중
+아무거나 눌러도 이 페이지로 이동하고, 해당 섹션 위치로 자동 스크롤됩니다.
 
-전화번호나 이메일을 바꾸고 싶다면 `contact.html`에서 아래 두 줄을 찾아
+보안을 위해 이름·연락처 등을 입력받는 문의 양식은 두지 않았습니다. 전화번호와
+이메일을 보여주는 **연락 카드**만 있고, 클릭해도 전화 앱이나 메일 앱이 열리지
+않는 단순 텍스트 표시입니다 (탭하면 앱 선택 팝업이 뜨는 것도 원치 않으신다는
+요청에 따라, 일부러 클릭 동작 없이 정보만 보이도록 만들었습니다). 방문자가
+번호나 주소를 직접 보고 입력해 연락하는 방식이라, 홈페이지 자체는 어떤
+개인정보도 입력받거나 저장하지 않습니다.
+
+전화번호나 이메일을 바꾸고 싶다면 `contact.html`에서 아래 부분을 찾아
 수정하면 됩니다:
 
 ```html
-<a href="tel:02-1234-5678" class="contact-direct-card">
-<a href="mailto:sales@samwon.co.kr" class="contact-direct-card">
+<div class="contact-direct-card">
+  <span class="cd-label mono">TEL</span>
+  <strong class="h4">02-1234-5678</strong>
+  ...
 ```
-
-`href`의 값과 카드 안에 보이는 전화번호·이메일 텍스트를 함께 바꿔주세요.
 
 같은 이유로 원래 템플릿에 있던 개인정보 수집동의 체크박스, 개인정보
 처리방침 모달, 이메일 무단수집 거부 안내 등 개인정보 관련 내용은 10개
@@ -188,16 +244,16 @@ resources/
 
 1. [네이버 지도](https://map.naver.com)에서 정확한 위치 검색 → `공유` → 단축 URL 복사
 2. [카카오맵](https://map.kakao.com)에서도 동일하게 단축 URL 복사
-3. `location.html`의 `href="https://map.naver.com/..."`,
+3. `contact.html`(`#location-section` 부분)의 `href="https://map.naver.com/..."`,
    `href="https://map.kakao.com/..."` 부분을 복사한 단축 URL로 교체
 
 ---
 
 ## 회사 정보 수정하는 방법
 
-전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **10개 페이지
-전부**의 헤더·푸터에 공통으로 들어있고, `location.html`과 `contact.html`에는
-오시는 길·연락 카드에도 들어있습니다. 파일마다 브라우저의
+전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **9개 페이지
+전부**의 헤더·푸터에 공통으로 들어있고, `contact.html`에는 오시는 길·연락
+카드에도 들어있습니다. 파일마다 브라우저의
 찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.
 
 ---

@@ -151,10 +151,57 @@
   }
 }
 .subpage-wrap {
-  padding: 8rem 0;
+  padding: 6rem 0 8rem;
 }
 
 /* 인사말 */
+.greeting-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3.2rem;
+  margin-bottom: 1.2rem;
+}
+.greeting-top .title-area {
+  flex: 1;
+}
+.greeting-photo {
+  flex: 0 0 16rem;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1), rgba(var(--secondary-rgb), 0.08));
+  position: relative;
+}
+.greeting-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.greeting-photo.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.greeting-photo.is-empty::after {
+  content: "대표이사 사진\A준비중입니다";
+  white-space: pre-line;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.6;
+}
+@media (max-width: 992px) {
+  .greeting-top {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+}
 .greeting-lead {
   font-size: 2.2rem;
   font-weight: 700;
@@ -181,31 +228,87 @@
   color: #54648A;
 }
 
-/* 회사 연혁 */
-.history-list {
-  list-style: none;
-  margin-top: 2.4rem;
-  border-top: 1px solid rgba(var(--primary-rgb), 0.2);
+/* 회사 연혁: 세로 타임라인 (고급스러운 디자인) */
+.timeline-premium {
+  position: relative;
+  margin-top: 3.6rem;
 }
-.history-item {
+.timeline-premium::before {
+  content: "";
+  position: absolute;
+  left: 2.8rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary) 0%, rgba(var(--primary-rgb), 0.12) 100%);
+}
+.timeline-row {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  gap: 2.4rem;
-  padding: 2rem 0.4rem;
-  border-bottom: 1px dotted rgba(var(--primary-rgb), 0.2);
+  align-items: flex-start;
+  gap: 2.8rem;
+  padding-bottom: 3.6rem;
 }
-.history-year {
-  flex: 0 0 8rem;
+.timeline-row:last-child {
+  padding-bottom: 0;
+}
+.timeline-dot {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 5.6rem;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
-  font-size: 1.8rem;
-  color: var(--primary);
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  border: 3px solid #ffffff;
+  box-shadow: 0 10px 24px -10px rgba(var(--primary-rgb), 0.55);
 }
-.history-text {
+.timeline-row:first-child .timeline-dot {
+  background: var(--primary);
+}
+.timeline-card {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
+  border-radius: 0.8rem;
+  padding: 2rem 2.6rem;
+  box-shadow: 0 14px 30px -22px rgba(14, 42, 77, 0.3);
+  margin-top: 0.6rem;
+}
+.timeline-card strong {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+}
+.timeline-card p {
   font-size: 1.55rem;
-  color: #4B5560;
+  font-weight: 600;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+@media (max-width: 992px) {
+  .timeline-premium::before {
+    left: 2.2rem;
+  }
+  .timeline-dot {
+    flex: 0 0 4.4rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    font-size: 1.1rem;
+  }
 }
 
-/* 문의하기: 개인정보를 수집하지 않는 직접 연락 카드 */
+/* 문의하기: 개인정보를 수집하지 않는 직접 연락 카드 (클릭 동작 없는 정보 표시용) */
 .contact-direct {
   display: flex;
   gap: 2.4rem;
@@ -221,12 +324,7 @@
   border: 1px solid rgba(var(--primary-rgb), 0.25);
   border-radius: 0.8rem;
   background: #ffffff;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-.contact-direct-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 12px 30px -18px rgba(var(--primary-rgb), 0.5);
-  transform: translateY(-2px);
+  cursor: default;
 }
 .contact-direct-card .cd-label {
   font-size: 1.2rem;
@@ -235,6 +333,7 @@
 }
 .contact-direct-card strong {
   color: var(--secondary);
+  user-select: text;
 }
 .contact-direct-card .cd-sub {
   font-size: 1.4rem;
@@ -244,6 +343,31 @@
   margin-top: 2.4rem;
   font-size: 1.4rem;
   color: #54648A;
+}
+
+/* 오시는 길: 방문 안내 추가 정보 (콘텐츠 보강) */
+.location-extra {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.15);
+}
+.location-extra-item strong {
+  display: block;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+.location-extra-item p {
+  font-size: 1.45rem;
+  color: #54648A;
+  line-height: 1.7;
+}
+@media (max-width: 992px) {
+  .location-extra {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== 로고 색 반전 해제 =====
@@ -409,5 +533,140 @@
   }
   .product-tiles-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== 서브 페이지 상단 배너 =====
+   헤더가 항상 고정되어 있다 보니, 배너 없이 바로 본문이 시작되면
+   내용이 헤더에 너무 가깝게 붙어 보이는 문제가 있었습니다. 페이지마다
+   짧은 배너(그라디언트 배경 + 아이콘 + 제목)를 넣어서 본문 시작 위치를
+   시각적으로 여유 있게 내렸습니다. */
+.page-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 12.5rem 0 4.4rem;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(47, 111, 237, 0.35), transparent 55%),
+    radial-gradient(circle at 88% 80%, rgba(255, 255, 255, 0.08), transparent 45%),
+    linear-gradient(135deg, #0E2A4D 0%, #123B6B 55%, #1B54D6 130%);
+  color: #ffffff;
+}
+.page-banner-icon {
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16rem;
+  height: 16rem;
+  opacity: 0.16;
+  pointer-events: none;
+}
+.page-banner-icon img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) invert(1);
+}
+.page-banner-inner {
+  position: relative;
+  z-index: 1;
+}
+.page-banner-eyebrow {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.12em;
+  color: #9DC0FF;
+  margin-bottom: 1rem;
+}
+.page-banner-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+@media (max-width: 992px) {
+  .page-banner {
+    padding: 11rem 0 3.6rem;
+  }
+  .page-banner-title {
+    font-size: 2.4rem;
+  }
+  .page-banner-icon {
+    width: 11rem;
+    height: 11rem;
+    right: -1.5rem;
+  }
+}
+
+/* ===== 제품안내: 실제 단가표 품목을 보여주는 목록 테이블 =====
+   품목 수가 많은 카테고리라 탭 UI 대신 표 형태로 정리했습니다. */
+.spec-table-wrap {
+  margin-top: 3.2rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.spec-table thead th {
+  background: var(--secondary);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: left;
+  padding: 1.4rem 2rem;
+}
+.spec-table tbody td {
+  padding: 1.6rem 2rem;
+  font-size: 1.45rem;
+  color: var(--secondary);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.12);
+  background: #ffffff;
+}
+.spec-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.spec-table tbody tr:hover td {
+  background: rgba(var(--primary-rgb), 0.04);
+}
+.spec-table td.col-item {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.spec-table td.col-size {
+  color: #54648A;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.25rem;
+}
+.spec-table td.col-note {
+  color: #7A88A6;
+  font-size: 1.3rem;
+}
+.spec-table-note {
+  margin-top: 1.6rem;
+  font-size: 1.3rem;
+  color: #7A88A6;
+}
+@media (max-width: 992px) {
+  .spec-table thead {
+    display: none;
+  }
+  .spec-table, .spec-table tbody, .spec-table tr, .spec-table td {
+    display: block;
+    width: 100%;
+  }
+  .spec-table tbody tr {
+    padding: 1.6rem 2rem;
+  }
+  .spec-table td {
+    border-bottom: none;
+    padding: 0.3rem 0;
+  }
+  .spec-table td.col-size::before {
+    content: "규격: ";
+  }
+  .spec-table td.col-note::before {
+    content: "비고: ";
   }
 }

@@ -8,7 +8,7 @@
 jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있어서
 별도 설치 없이 GitHub Pages에 그대로 올리면 동작합니다.
 
-## 페이지 구성 (총 9개)
+## 페이지 구성 (총 11개)
 
 | 파일 | 내용 | 좌측 소분류 메뉴 |
 |---|---|---|
@@ -16,13 +16,15 @@ jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있�
 | `about.html` | 회사소개 &gt; 회사개요 + 왜 삼원인가 | 회사개요 / 인사말 / 회사 연혁 |
 | `about-greeting.html` | 회사소개 &gt; 인사말 (대표이사 사진 포함) | 〃 |
 | `about-history.html` | 회사소개 &gt; 회사 연혁 (세로 타임라인) | 〃 |
-| `products.html` | 제품안내 &gt; 난연 전선관(CD관) 품목표 | 4개 카테고리 |
+| `products.html` | 제품안내 &gt; 난연 전선관(CD관) 품목표 | 6개 카테고리 |
 | `products-hi.html` | 제품안내 &gt; HI관 품목표 | 〃 |
 | `products-elp.html` | 제품안내 &gt; ELP관 품목표 | 〃 |
 | `products-fc.html` | 제품안내 &gt; FC통신관 품목표 | 〃 |
+| `products-waterproof.html` | 제품안내 &gt; 관로구방수장치 및 관로 부속자재 품목표 | 〃 |
+| `products-etc.html` | 제품안내 &gt; 기타 품목 품목표 | 〃 |
 | `contact.html` | 오시는 길(지도·주소) + 문의하기(연락처) 통합 페이지 | 없음 |
 
-상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 9개 페이지로 정확히 연결되어
+상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 11개 페이지로 정확히 연결되어
 있습니다. "오시는 길"과 "문의하기"는 같은 `contact.html` 파일 안의 서로 다른
 섹션(`#location-section`, `#contact-section`)으로 연결됩니다. 지금 보고 있는
 대분류 메뉴는 파란 밑줄로, 좌측 소분류 메뉴는 파란 배경으로 현재 위치가
@@ -33,7 +35,8 @@ jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있�
 ```
 index.html, about.html, about-greeting.html, about-history.html,
 products.html, products-hi.html, products-elp.html,
-products-fc.html, contact.html      ← 9개 페이지
+products-fc.html, products-waterproof.html, products-etc.html,
+contact.html      ← 11개 페이지
 resources/
   css/
     setting.css                ← 폰트, 기본 변수 (거의 수정 불필요)
@@ -55,11 +58,11 @@ resources/
 
 **절대 건드리면 안 되는 파일**: `plugin.js`, `templatehouse.js`, `style.js`,
 `setting.js`, `templatehouse.css`, `plugin.css` — 이 파일들이 탭 전환, 슬라이드,
-모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 9개 페이지 전부에서
+모바일 메뉴 등 모든 동작을 담당합니다. 여기를 수정하면 11개 페이지 전부에서
 동작이 깨질 수 있어요.
 
 **색상을 바꾸고 싶다면** `site-overrides.css`의 `:root` 안 `--primary`,
-`--secondary` 값만 바꾸면 버튼·포인트 색상이 9개 페이지 전체에서 한 번에
+`--secondary` 값만 바꾸면 버튼·포인트 색상이 11개 페이지 전체에서 한 번에
 바뀝니다.
 
 ---
@@ -80,7 +83,7 @@ resources/
 2. **왜 삼원인가 미리보기** — `about.html`의 체크포인트 중 3가지를 뽑아 카드로
    보여주고, "더 알아보기" 버튼으로 연결했습니다. 스크롤해서 화면에 들어오면
    아래에서 위로 살짝 올라오며 나타나는 애니메이션이 적용되어 있어요.
-3. **제품 카테고리 바로가기 타일** — 4개 카테고리 페이지로 바로 이동하는
+3. **제품 카테고리 바로가기 타일** — 6개 카테고리 페이지로 바로 이동하는
    타일입니다. 마우스를 올리면 살짝 떠오르고 아이콘이 회전하는 효과가 있어요.
 
 이 애니메이션은 `class="reveal-up"`이 붙은 요소라면 어디에나 적용됩니다.
@@ -175,7 +178,7 @@ resources/
 
 ## 제품 품목 추가·수정하는 방법
 
-제품안내 4개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
+제품안내 6개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
 그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요.
 표의 한 줄은 아래 형태입니다:
 
@@ -189,7 +192,7 @@ resources/
 
 - 품목을 추가하려면 `<tr>...</tr>` 한 덩어리를 복사해서 `<tbody>` 안에 붙여넣고 내용만 바꾸세요.
 - 제품 상세 설명이나 사진을 넣고 싶으시면 알려주시면 이 표에 맞춰 반영해드릴게요.
-- 새 카테고리를 추가하려면 4개 제품 페이지 전부의 좌측 소분류 메뉴와 헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다.
+- 새 카테고리를 추가하려면 6개 제품 페이지 전부의 좌측 소분류 메뉴와 헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다.
 ---
 
 ## 사진 교체하는 방법
@@ -204,7 +207,7 @@ resources/
 ## GitHub Pages에 올리는 방법
 
 1. [github.com](https://github.com)에서 새 저장소 생성 (Public)
-2. 9개 HTML 파일과 `resources` 폴더 전체를 저장소 루트에 업로드
+2. 11개 HTML 파일과 `resources` 폴더 전체를 저장소 루트에 업로드
    (`Add file` → `Upload files`, 폴더째로 드래그)
 3. 저장소 `Settings` → `Pages` → Branch를 `main` / `/(root)`로 설정 → Save
 4. 1~2분 후 `https://내아이디.github.io/저장소이름/` 주소로 접속
@@ -251,7 +254,7 @@ resources/
 
 ## 회사 정보 수정하는 방법
 
-전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **9개 페이지
+전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **11개 페이지
 전부**의 헤더·푸터에 공통으로 들어있고, `contact.html`에는 오시는 길·연락
 카드에도 들어있습니다. 파일마다 브라우저의
 찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.

@@ -16,12 +16,12 @@ jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있�
 | `about.html` | 회사소개 &gt; 회사개요 + 왜 삼원인가 | 회사개요 / 인사말 / 회사 연혁 |
 | `about-greeting.html` | 회사소개 &gt; 인사말 (대표이사 사진 포함) | 〃 |
 | `about-history.html` | 회사소개 &gt; 회사 연혁 (세로 타임라인) | 〃 |
-| `products.html` | 제품안내 &gt; 난연 전선관(CD관) 품목표 | 6개 카테고리 |
-| `products-hi.html` | 제품안내 &gt; HI관 품목표 | 〃 |
-| `products-elp.html` | 제품안내 &gt; ELP관 품목표 | 〃 |
-| `products-fc.html` | 제품안내 &gt; FC통신관 품목표 | 〃 |
-| `products-waterproof.html` | 제품안내 &gt; 관로구방수장치 및 관로 부속자재 품목표 | 〃 |
-| `products-etc.html` | 제품안내 &gt; 기타 품목 품목표 | 〃 |
+| `products.html` | 제품안내 &gt; 전선관 본품 품목표 (CD-PIPE·HI-PIPE·PE평활관·ELP·FC통신관) | 본품 1 / 부속자재 5 |
+| `products-cd.html` | 제품안내 &gt; CD관 부속자재 품목표 | 〃 |
+| `products-hi.html` | 제품안내 &gt; HI관 부속자재 품목표 | 〃 |
+| `products-elp.html` | 제품안내 &gt; ELP관 부속자재 품목표 | 〃 |
+| `products-waterproof.html` | 제품안내 &gt; 관로구방수장치·연결부속 품목표 | 〃 |
+| `products-etc.html` | 제품안내 &gt; 기타 부속자재 품목표 | 〃 |
 | `contact.html` | 오시는 길(지도·주소) + 문의하기(연락처) 통합 페이지 | 없음 |
 
 상단 메가메뉴(PC)와 모바일 풀메뉴 모두 이 11개 페이지로 정확히 연결되어
@@ -34,8 +34,8 @@ jQuery, GSAP, Swiper가 전부 `resources/js/plugin.js` 안에 번들되어 있�
 
 ```
 index.html, about.html, about-greeting.html, about-history.html,
-products.html, products-hi.html, products-elp.html,
-products-fc.html, products-waterproof.html, products-etc.html,
+products.html, products-cd.html, products-hi.html, products-elp.html,
+products-waterproof.html, products-etc.html,
 contact.html      ← 11개 페이지
 resources/
   css/
@@ -83,7 +83,7 @@ resources/
 2. **왜 삼원인가 미리보기** — `about.html`의 체크포인트 중 3가지를 뽑아 카드로
    보여주고, "더 알아보기" 버튼으로 연결했습니다. 스크롤해서 화면에 들어오면
    아래에서 위로 살짝 올라오며 나타나는 애니메이션이 적용되어 있어요.
-3. **제품 카테고리 바로가기 타일** — 6개 카테고리 페이지로 바로 이동하는
+3. **제품 카테고리 바로가기 타일** — 제품안내 6개 페이지로 바로 이동하는
    타일입니다. 마우스를 올리면 살짝 떠오르고 아이콘이 회전하는 효과가 있어요.
 
 이 애니메이션은 `class="reveal-up"`이 붙은 요소라면 어디에나 적용됩니다.
@@ -176,23 +176,45 @@ resources/
 `about-greeting.html`의 `<img src="./resources/images_custom/ceo-photo.jpg"`
 부분의 경로를 바꿔주세요.
 
+## 제품 카테고리 구조 (본품 / 부속자재 2단 구성)
+
+제품안내는 **본품**과 **부속자재** 두 그룹으로 나뉩니다. 좌측 소분류 메뉴에서도
+이 두 그룹이 구분되어 보여요.
+
+- **본품** — `products.html` 한 페이지. CD-PIPE, HI-PIPE, PE평활관, ELP, FC통신관처럼
+  전선관 그 자체만 모아뒀습니다.
+- **부속자재** — 관 종류별로 5개 페이지. 커넥터·커플링·캡·스페이서처럼 본품에 딸린
+  부품들을 관 종류에 따라 나눴습니다.
+  - `products-cd.html`: CD관 부속자재
+  - `products-hi.html`: HI관 부속자재
+  - `products-elp.html`: ELP관 부속자재
+  - `products-waterproof.html`: 관로구방수장치·연결부속 (ELP·직관·코아용 방수장치, 각종 이종 연결 커플링 등 특정 관 종류에 묶이지 않는 부속)
+  - `products-etc.html`: 기타 부속자재 (보호판, 단열고정핀, 위샤캡)
+
 ## 제품 품목 추가·수정하는 방법
 
 제품안내 6개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
-그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요.
-표의 한 줄은 아래 형태입니다:
+그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요. 규격은
+한눈에 읽기 쉽도록 낱개 칩(동그란 알약 모양) 형태로 표시됩니다. 표의 한 줄은
+아래 형태입니다:
 
 ```html
 <tr>
   <td class="col-item">품목명</td>
-  <td class="col-size">16C · 22C · 28C</td>
+  <td class="col-size"><span class="size-chip">16C</span><span class="size-chip">22C</span></td>
   <td class="col-note">비고(없으면 -)</td>
 </tr>
 ```
 
 - 품목을 추가하려면 `<tr>...</tr>` 한 덩어리를 복사해서 `<tbody>` 안에 붙여넣고 내용만 바꾸세요.
+  규격을 추가·삭제할 때는 `<span class="size-chip">규격값</span>`을 통째로 복사하거나 지우면 됩니다.
+- 품목이 본품인지 부속자재인지 애매하면, 관 자체(파이프)는 `products.html`(본품)에,
+  그 외 부품류는 해당 관 종류의 부속자재 페이지에 넣으면 됩니다.
 - 제품 상세 설명이나 사진을 넣고 싶으시면 알려주시면 이 표에 맞춰 반영해드릴게요.
-- 새 카테고리를 추가하려면 6개 제품 페이지 전부의 좌측 소분류 메뉴와 헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다.
+- 새 카테고리(페이지)를 추가하려면 6개 제품 페이지 전부의 좌측 소분류 메뉴와
+  헤더 메뉴(PC용·모바일용)에 링크를 똑같이 추가해야 합니다. 본품 그룹에 추가할지
+  부속자재 그룹에 추가할지도 함께 정해주세요.
+
 ---
 
 ## 사진 교체하는 방법
@@ -216,9 +238,11 @@ resources/
 
 ## 오시는 길 · 문의하기 통합 페이지 (개인정보 미수집 방식)
 
-"오시는 길"과 "문의하기"는 이제 `contact.html` 한 페이지 안에 위아래로 함께
-들어있습니다 (위: 지도·주소, 아래: 연락처 카드). 상단 메뉴에서 두 항목 중
-아무거나 눌러도 이 페이지로 이동하고, 해당 섹션 위치로 자동 스크롤됩니다.
+"오시는 길"과 "문의하기"는 `contact.html` 한 페이지 안에 **좌측 지도 / 우측
+주소+연락처**로 함께 들어있습니다. 우측 칼럼은 위에서부터 주소 → 연락처
+카드(TEL/EMAIL) → 안내 문구 순서로, 연락처가 화면 상단 가까이 보이도록
+배치했습니다. 상단 메뉴에서 "오시는 길"이나 "문의하기" 중 아무거나 눌러도
+이 페이지로 이동하고, "문의하기"는 연락처 카드 위치로 자동 스크롤됩니다.
 
 보안을 위해 이름·연락처 등을 입력받는 문의 양식은 두지 않았습니다. 전화번호와
 이메일을 보여주는 **연락 카드**만 있고, 클릭해도 전화 앱이나 메일 앱이 열리지
@@ -233,17 +257,27 @@ resources/
 ```html
 <div class="contact-direct-card">
   <span class="cd-label mono">TEL</span>
-  <strong class="h4">02-1234-5678</strong>
+  <strong class="h4">031-795-0616</strong>
   ...
 ```
 
 같은 이유로 원래 템플릿에 있던 개인정보 수집동의 체크박스, 개인정보
-처리방침 모달, 이메일 무단수집 거부 안내 등 개인정보 관련 내용은 10개
-페이지 전부에서 삭제했습니다.
+처리방침 모달, 이메일 무단수집 거부 안내 등 개인정보 관련 내용은 전체
+페이지에서 삭제했습니다.
 
 ---
 
-## 오시는 길 지도 링크 수정하기
+## 오시는 길 지도 교체·링크 수정하기
+
+지금은 지도 자리에 블루 톤 플레이스홀더 이미지(`map_thumb.svg`)가 들어있습니다.
+실제 지도 캡처 이미지를 받으면 `contact.html`의 아래 부분에서 파일 경로만
+바꾸면 됩니다:
+
+```html
+<img src="./resources/images_custom/map_thumb.svg" alt="본사 지도" />
+```
+
+네이버·카카오 지도 링크를 더 정확하게 연결하고 싶다면:
 
 1. [네이버 지도](https://map.naver.com)에서 정확한 위치 검색 → `공유` → 단축 URL 복사
 2. [카카오맵](https://map.kakao.com)에서도 동일하게 단축 URL 복사
@@ -254,10 +288,10 @@ resources/
 
 ## 회사 정보 수정하는 방법
 
-전화번호(`02-1234-5678`), 이메일(`sales@samwon.co.kr`), 주소는 **11개 페이지
-전부**의 헤더·푸터에 공통으로 들어있고, `contact.html`에는 오시는 길·연락
-카드에도 들어있습니다. 파일마다 브라우저의
-찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.
+전화번호(`031-795-0616`), 이메일(`isamwon@naver.com`), 주소(`경기도 하남시
+하산곡동로 106번길 64`)는 **11개 페이지 전부**의 헤더·푸터에 공통으로
+들어있고, `contact.html`에는 오시는 길·연락 카드에도 들어있습니다. 파일마다
+브라우저의 찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.
 
 ---
 

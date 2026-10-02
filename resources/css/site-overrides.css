@@ -129,6 +129,23 @@
   color: #ffffff;
   font-weight: 700;
 }
+.subnav-group {
+  padding: 0.8rem 0.8rem 0;
+}
+.subnav-group:first-child {
+  padding-top: 0.8rem;
+}
+.subnav-group-label {
+  display: block;
+  padding: 0.8rem 1.4rem 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+}
+.subnav-group .subnav-list {
+  padding: 0;
+}
 .subpage-content {
   flex: 1;
   min-width: 0;
@@ -343,6 +360,52 @@
   margin-top: 2.4rem;
   font-size: 1.4rem;
   color: #54648A;
+}
+
+/* 오시는 길: 좌측 지도 / 우측 주소+연락처 (문의하기와 통합) */
+.location-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 3.2rem;
+}
+.location-map-col {
+  position: sticky;
+  top: 12rem;
+}
+.location-map-frame {
+  border-radius: 0.8rem;
+  overflow: hidden;
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
+  box-shadow: 0 14px 32px -26px rgba(14, 42, 77, 0.35);
+}
+.location-map-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.location-address {
+  margin-bottom: 2.8rem;
+}
+.location-address strong {
+  display: block;
+  color: var(--secondary);
+  margin-bottom: 0.8rem;
+}
+.location-address p {
+  font-size: 1.55rem;
+  color: #54648A;
+  margin-bottom: 1.6rem;
+}
+@media (max-width: 992px) {
+  .location-split {
+    grid-template-columns: 1fr;
+  }
+  .location-map-col {
+    position: static;
+  }
 }
 
 /* 오시는 길: 방문 안내 추가 정보 (콘텐츠 보강) */
@@ -598,12 +661,15 @@
 }
 
 /* ===== 제품안내: 실제 단가표 품목을 보여주는 목록 테이블 =====
-   품목 수가 많은 카테고리라 탭 UI 대신 표 형태로 정리했습니다. */
+   품목 수가 많은 카테고리라 탭 UI 대신 표 형태로 정리했습니다.
+   규격은 한 줄로 촘촘한 텍스트 대신, 낱개로 구분되는 칩(chip) 형태로 표시해
+   한눈에 훑어보기 쉽게 만들었습니다. */
 .spec-table-wrap {
   margin-top: 3.2rem;
   border: 1px solid rgba(var(--primary-rgb), 0.18);
   border-radius: 0.8rem;
   overflow: hidden;
+  box-shadow: 0 14px 32px -26px rgba(14, 42, 77, 0.35);
 }
 .spec-table {
   width: 100%;
@@ -612,41 +678,66 @@
 .spec-table thead th {
   background: var(--secondary);
   color: #ffffff;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-align: left;
-  padding: 1.4rem 2rem;
+  padding: 1.8rem 2.4rem;
+  letter-spacing: 0.02em;
 }
 .spec-table tbody td {
-  padding: 1.6rem 2rem;
-  font-size: 1.45rem;
+  padding: 2.2rem 2.4rem;
+  font-size: 1.55rem;
   color: var(--secondary);
   border-bottom: 1px solid rgba(var(--primary-rgb), 0.12);
   background: #ffffff;
+  vertical-align: middle;
+}
+.spec-table tbody tr:nth-child(even) td {
+  background: rgba(var(--primary-rgb), 0.03);
 }
 .spec-table tbody tr:last-child td {
   border-bottom: none;
 }
 .spec-table tbody tr:hover td {
-  background: rgba(var(--primary-rgb), 0.04);
+  background: rgba(var(--primary-rgb), 0.07);
 }
 .spec-table td.col-item {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--secondary);
+  border-left: 4px solid var(--primary);
   white-space: nowrap;
 }
 .spec-table td.col-size {
-  color: #54648A;
+  min-width: 26rem;
+}
+.size-chip {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  margin: 0.3rem 0.4rem 0.3rem 0;
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.25);
+  border-radius: 999px;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
 }
 .spec-table td.col-note {
   color: #7A88A6;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
+  line-height: 1.6;
 }
 .spec-table-note {
-  margin-top: 1.6rem;
-  font-size: 1.3rem;
-  color: #7A88A6;
+  margin-top: 1.8rem;
+  font-size: 1.4rem;
+  color: #54648A;
+}
+.spec-table-note a {
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom: 1px solid var(--primary);
 }
 @media (max-width: 992px) {
   .spec-table thead {
@@ -657,16 +748,43 @@
     width: 100%;
   }
   .spec-table tbody tr {
-    padding: 1.6rem 2rem;
+    padding: 2rem 2.4rem;
   }
   .spec-table td {
     border-bottom: none;
-    padding: 0.3rem 0;
+    border-left: none;
+    padding: 0.4rem 0;
+  }
+  .spec-table td.col-item {
+    border-left: none;
+    font-size: 1.8rem;
   }
   .spec-table td.col-size::before {
-    content: "규격: ";
+    content: "규격 ";
+    display: block;
+    font-size: 1.2rem;
+    color: #7A88A6;
+    font-weight: 400;
+    margin-top: 0.8rem;
   }
   .spec-table td.col-note::before {
-    content: "비고: ";
+    content: "비고 ";
+    display: block;
+    font-size: 1.2rem;
+    color: #7A88A6;
+    margin-top: 0.6rem;
   }
 }
+
+/* 카테고리 섹션 안내 배너: 이 페이지가 어떤 품목군인지 한눈에 알려줌 */
+.category-lead {
+  margin-top: 1.6rem;
+  padding: 1.6rem 2rem;
+  background: rgba(var(--primary-rgb), 0.06);
+  border-left: 4px solid var(--primary);
+  border-radius: 0.4rem;
+  font-size: 1.45rem;
+  color: var(--secondary);
+  line-height: 1.6;
+}
+

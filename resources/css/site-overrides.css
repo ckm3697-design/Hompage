@@ -380,10 +380,17 @@
   border: 1px solid rgba(var(--primary-rgb), 0.18);
   box-shadow: 0 14px 32px -26px rgba(14, 42, 77, 0.35);
 }
+.location-map-frame {
+  min-height: 44rem;
+  background: rgba(var(--primary-rgb), 0.05);
+}
+.location-map-frame iframe,
 .location-map-frame img {
   width: 100%;
   height: 100%;
+  min-height: 44rem;
   display: block;
+  border: 0;
   object-fit: cover;
 }
 .location-address {
@@ -411,7 +418,7 @@
 /* 오시는 길: 방문 안내 추가 정보 (콘텐츠 보강) */
 .location-extra {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 2rem;
   margin-top: 4rem;
   padding-top: 4rem;
@@ -662,8 +669,7 @@
 
 /* ===== 제품안내: 실제 단가표 품목을 보여주는 목록 테이블 =====
    품목 수가 많은 카테고리라 탭 UI 대신 표 형태로 정리했습니다.
-   규격은 한 줄로 촘촘한 텍스트 대신, 낱개로 구분되는 칩(chip) 형태로 표시해
-   한눈에 훑어보기 쉽게 만들었습니다. */
+   규격은 값마다 구분선(|)으로 나눠 일반 텍스트로 크게 표시합니다. */
 .spec-table-wrap {
   margin-top: 3.2rem;
   border: 1px solid rgba(var(--primary-rgb), 0.18);
@@ -713,16 +719,18 @@
 }
 .size-chip {
   display: inline-block;
-  padding: 0.5rem 1.2rem;
-  margin: 0.3rem 0.4rem 0.3rem 0;
-  background: rgba(var(--primary-rgb), 0.08);
-  border: 1px solid rgba(var(--primary-rgb), 0.25);
-  border-radius: 999px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 1.35rem;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-size: 1.55rem;
   font-weight: 600;
-  color: var(--primary);
+  line-height: 2;
+  color: var(--secondary);
   white-space: nowrap;
+}
+.size-chip:not(:last-child)::after {
+  content: "|";
+  margin: 0 1.1rem;
+  font-weight: 400;
+  color: #C2CCDD;
 }
 .spec-table td.col-note {
   color: #7A88A6;

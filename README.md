@@ -195,7 +195,7 @@ resources/
 
 제품안내 6개 페이지의 품목은 실제 단가표(삼원전기산업㈜ 전선관 단가표)의 품목·규격을
 그대로 옮긴 표입니다. 가격은 넣지 않았고, 품목명과 적용 규격만 들어 있어요. 규격은
-한눈에 읽기 쉽도록 낱개 칩(동그란 알약 모양) 형태로 표시됩니다. 표의 한 줄은
+값마다 구분선(|)으로 나눠서 일반 글씨로 크게 표시됩니다. 표의 한 줄은
 아래 형태입니다:
 
 ```html
@@ -267,29 +267,35 @@ resources/
 
 ---
 
-## 오시는 길 지도 교체·링크 수정하기
+## 오시는 길 지도 (Google 지도)
 
-지금은 지도 자리에 블루 톤 플레이스홀더 이미지(`map_thumb.svg`)가 들어있습니다.
-실제 지도 캡처 이미지를 받으면 `contact.html`의 아래 부분에서 파일 경로만
-바꾸면 됩니다:
+`contact.html` 좌측 지도는 Google 지도를 불러오는 방식(iframe)이라, 주소만 맞으면
+자동으로 표시됩니다. 지도를 불러오려면 방문자가 인터넷에 연결되어 있어야 하고,
+파일을 더블클릭해서 열기보다 GitHub Pages 주소에서 확인하는 걸 권장합니다.
+
+핀 위치가 실제 건물과 조금 어긋나 보이면, Google 지도에서 정확한 위치를 검색한 뒤
+`공유` → `지도 퍼가기` → HTML 복사로 얻은 코드를 아래 `<iframe ...></iframe>` 부분에
+통째로 교체하세요:
 
 ```html
-<img src="./resources/images_custom/map_thumb.svg" alt="본사 지도" />
+<div class="location-map-frame">
+  <iframe src="https://www.google.com/maps?q=...&output=embed" ...></iframe>
+</div>
 ```
 
-네이버·카카오 지도 링크를 더 정확하게 연결하고 싶다면:
+캡처한 지도 이미지를 대신 쓰고 싶다면 `<iframe>` 자리에
+`<img src="./resources/images_custom/내지도.png" alt="본사 지도" />`를 넣으면 됩니다.
 
-1. [네이버 지도](https://map.naver.com)에서 정확한 위치 검색 → `공유` → 단축 URL 복사
-2. [카카오맵](https://map.kakao.com)에서도 동일하게 단축 URL 복사
-3. `contact.html`(`#location-section` 부분)의 `href="https://map.naver.com/..."`,
-   `href="https://map.kakao.com/..."` 부분을 복사한 단축 URL로 교체
-
+네이버·카카오 지도 버튼은 주소 검색 링크로 걸려 있습니다. 더 정확하게
+연결하고 싶다면 각 지도에서 위치를 검색해 `공유` 단축 URL을 복사한 뒤
+`contact.html`의 `href="https://map.naver.com/..."`,
+`href="https://map.kakao.com/..."` 부분을 교체하세요.
 ---
 
 ## 회사 정보 수정하는 방법
 
 전화번호(`031-795-0616`), 이메일(`isamwon@naver.com`), 주소(`경기도 하남시
-하산곡동로 106번길 64`)는 **11개 페이지 전부**의 헤더·푸터에 공통으로
+산곡동로 106번길 64 (하산곡동)`)는 **11개 페이지 전부**의 헤더·푸터에 공통으로
 들어있고, `contact.html`에는 오시는 길·연락 카드에도 들어있습니다. 파일마다
 브라우저의 찾기(Ctrl+F / Cmd+F)로 옛 값을 검색해 하나씩 바꿔주세요.
 

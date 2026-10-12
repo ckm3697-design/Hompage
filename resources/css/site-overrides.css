@@ -470,33 +470,41 @@
   background: var(--black) !important;
 }
 
-/* ===== 홈 화면 추가 섹션: 신뢰 배지 마퀴 ===== */
+/* ===== 홈 화면: 흐르는 강점 배너 (꼬리물기) =====
+   문구 한 벌(.trust-marquee-group)을 site-custom.js가 이어 붙여서
+   끝과 처음이 끊김 없이 계속 왼쪽으로 흐르게 만듭니다. */
 .trust-marquee {
   overflow: hidden;
   background: var(--secondary);
-  padding: 1.8rem 0;
+  padding: 2rem 0;
 }
 .trust-marquee-track {
   display: flex;
   width: max-content;
-  gap: 4.8rem;
-  animation: samwon-marquee 24s linear infinite;
 }
-.trust-marquee-track span {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #ffffff;
-  white-space: nowrap;
+.trust-marquee.is-running .trust-marquee-track {
+  animation: samwon-marquee var(--marquee-duration, 40s) linear infinite;
+}
+.trust-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+}
+.trust-marquee-item {
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  margin-right: 4.8rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
 }
-.trust-marquee-track span::before {
+.trust-marquee-item::before {
   content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--primary);
+  background: #7FA8F5;
   display: inline-block;
 }
 @keyframes samwon-marquee {
@@ -504,7 +512,7 @@
   to { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .trust-marquee-track { animation: none; }
+  .trust-marquee.is-running .trust-marquee-track { animation: none; }
 }
 
 /* ===== 홈 화면 추가 섹션: 왜 삼원인가 미리보기 ===== */

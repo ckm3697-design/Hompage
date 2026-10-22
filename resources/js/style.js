@@ -118,6 +118,8 @@
   $(function() {
     $(".properties-N4[id=\'hero-section\']").each(function() {
       const $block = $(this);
+      // 메인 배너에 슬라이드가 없는 구성에서는 Swiper를 만들지 않음
+      if (!$block.find(".swiper").length) return;
       // Swiper
       const swiper = new Swiper(".properties-N4[id=\'hero-section\'] .swiper", {
         loop: true,

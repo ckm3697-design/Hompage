@@ -415,31 +415,6 @@
   }
 }
 
-/* 오시는 길: 방문 안내 추가 정보 (콘텐츠 보강) */
-.location-extra {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 4rem;
-  padding-top: 4rem;
-  border-top: 1px solid rgba(var(--primary-rgb), 0.15);
-}
-.location-extra-item strong {
-  display: block;
-  color: var(--secondary);
-  margin-bottom: 1rem;
-}
-.location-extra-item p {
-  font-size: 1.45rem;
-  color: #54648A;
-  line-height: 1.7;
-}
-@media (max-width: 992px) {
-  .location-extra {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ===== 로고 색 반전 해제 =====
    원본 템플릿은 헤더가 사진 위에 투명하게 떠 있을 때 로고를 흰색으로
    반전시켰다가, 마우스를 올리면 원래 색으로 되돌리는 효과가 있었습니다.
@@ -522,7 +497,7 @@
 }
 .why-preview-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2.4rem;
   margin-top: 4rem;
 }
